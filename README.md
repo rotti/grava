@@ -12,7 +12,6 @@ The used database [InfluxDB](https://www.influxdata.com/) is a time series datab
 
 ## How to see your Data in Grafana
 1. Clone this repository
-
   ```
   git clone https://github.com/rotti/grava.git
   ```
@@ -42,38 +41,46 @@ The used database [InfluxDB](https://www.influxdata.com/) is a time series datab
 
 4. Python Library: Linux Installation
 
-TODO
+  TODO
 
-pip install influxdb, xxxxxxxxxx
+  ```
+  pip install influxdb, xxxxxxxxxx
 
+  ```
 
 5. Start the Backend Services
-> sudo service influxdb start
-> sudo service grafana-server start
+  ```
+  sudo service influxdb start
+  sudo service grafana-server start
+  ```
 
 
 6. Fill Database with Strava Activities
-> python filldb.py
+  ```
+  python filldb.py
+  ```
 
 
-You will need your *Strava Access Token* to get your Strava activities. Use *token_helper.py" the get it.
+  You will need your *Strava Access Token* to get your Strava activities. Use *token_helper.py" the get it.
 
 
 7. Generate Grafana Dashboards
-> python make_dashboards.py
+  ```
+  python make_dashboards.py
+  ```
 
-Using the Dashboard Templates is optional. You may make your own. Find further help here: http://docs.grafana.org/
+  Using the Dashboard Templates is optional. You may make your own. Find further help here: http://docs.grafana.org/
 
 
 
 7. Login to Grafana
 
-Open a browser and connect to Grafana. If it runs on your system the URL would be *http://localhost:3000*
+  Open a browser and connect to Grafana. If it runs on your system the URL would be *http://localhost:3000*
 
-Login with the credentials ...
+  Login with the credentials ...
 
-User: admin
-Passwort: admin
+  > User: admin
+  > Passwort: admin
 
 
 
