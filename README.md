@@ -12,21 +12,27 @@ The used database [InfluxDB](https://www.influxdata.com/) is a time series datab
 
 ## How to see your Data in Grafana
 1. Clone this repository
-> git clone https://github.com/rotti/grava.git
+```
+git clone https://github.com/rotti/grava.git
+```
 
 
 2. InfluxDB: Linux Installation (Ubuntu)
-> sudo apt-get update
-> 
-> curl -sL https://repos.influxdata.com/influxdb.key |  sudo apt-key add - source /etc/lsb-release echo "deb https://repos.influxdata.com/${DISTRIB_ID,,} ${DISTRIB_CODENAME} stable" | sudo tee /etc/apt/sources.list.d/influxdb.lis
-> sudo apt-get update && sudo apt-get install influxdb
+```
+sudo apt-get update
+curl -sL https://repos.influxdata.com/influxdb.key |  sudo apt-key add - source /etc/lsb-release echo "deb https://repos.influxdata.com/${DISTRIB_ID,,} ${DISTRIB_CODENAME} stable" | sudo tee /etc/apt/sources.list.d/influxdb.lis
+sudo apt-get update && sudo apt-get install influxdb
+```
 
 Find further help here: https://docs.influxdata.com/influxdb/v1.1/introduction/installation/
 
+
 3. Grafana: Linux Installation (Ubuntu)
-> echo "deb https://packagecloud.io/grafana/stable/debian/ wheezy main" | sudo tee /etc/apt/sources.list.d/grafana.list 
-> curl https://packagecloud.io/gpg.key | sudo apt-key add -
-> sudo apt-get update && sudo apt-get install grafana
+```
+echo "deb https://packagecloud.io/grafana/stable/debian/ wheezy main" | sudo tee /etc/apt/sources.list.d/grafana.list 
+curl https://packagecloud.io/gpg.key | sudo apt-key add -
+sudo apt-get update && sudo apt-get install grafana
+```
 
 Find further help here: http://docs.grafana.org/installation/debian/
 
