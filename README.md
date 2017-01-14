@@ -11,12 +11,13 @@ The used database [InfluxDB](https://www.influxdata.com/) is a time series datab
 * *make_dashboards.py*: Reads JSON templates and creates Grafana dashboards 
 
 ## How to see your Data in Grafana
-1. Clone this repository
+**1. Clone this repository (Linux)**
   ```
   git clone https://github.com/rotti/grava.git
+  cd grava
   ```
 
-2. InfluxDB: Linux Installation (Ubuntu)
+**2. InfluxDB: Linux Installation (Ubuntu)**
 
   ```
   sudo apt-get update
@@ -48,7 +49,7 @@ The used database [InfluxDB](https://www.influxdata.com/) is a time series datab
 
   ```
 
-5. Start the Backend Services
+5. Start the Backend Services (Ubuntu)
   ```
   sudo service influxdb start
   sudo service grafana-server start
