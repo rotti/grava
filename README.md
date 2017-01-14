@@ -14,18 +14,61 @@ The used database [InfluxDB](https://www.influxdata.com/) is a time series datab
 1. Clone this repository
 > git clone https://github.com/rotti/grava.git
 
-2. InfluxDB Installation
-TODO
 
-3. Grafana Installation
-TODO
+2. InfluxDB: Linux Installation (Ubuntu)
+> sudo apt-get update
+> 
+> curl -sL https://repos.influxdata.com/influxdb.key |  sudo apt-key add - source /etc/lsb-release echo "deb https://repos.influxdata.com/${DISTRIB_ID,,} ${DISTRIB_CODENAME} stable" | sudo tee /etc/apt/sources.list.d/influxdb.lis
+> sudo apt-get update && sudo apt-get install influxdb
 
-4. Python library Installation
+Find further help here: https://docs.influxdata.com/influxdb/v1.1/introduction/installation/
+
+3. Grafana: Linux Installation (Ubuntu)
+> echo "deb https://packagecloud.io/grafana/stable/debian/ wheezy main" | sudo tee /etc/apt/sources.list.d/grafana.list 
+> curl https://packagecloud.io/gpg.key | sudo apt-key add -
+> sudo apt-get update && sudo apt-get install grafana
+
+Find further help here: http://docs.grafana.org/installation/debian/
+
+If you want to use another visualising tool than Grafana, skip this step.
+
+
+4. Python Library: Linux Installation
+
 TODO
 
 pip install influxdb, xxxxxxxxxx
 
-5. Login to Grafana
+
+5. Start the Backend Services
+> sudo service influxdb start
+> sudo service grafana-server start
+
+
+6. Fill Database with Strava Activities
+> python filldb.py
+
+
+You will need your *Strava Access Token* to get your Strava activities. Use *token_helper.py" the get it.
+
+
+7. Generate Grafana Dashboards
+> python make_dashboards.py
+
+Using the Dashboard Templates is optional. You may make your own. Find further help here: http://docs.grafana.org/
+
+
+
+7. Login to Grafana
+
+Open a browser and connect to Grafana. If it runs on your system the URL would be *http://localhost:3000*
+
+Login with the credentials ...
+
+User: admin
+Passwort: admin
+
+
 
 
 ## Usage of token_helper.py
