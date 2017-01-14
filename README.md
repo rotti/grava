@@ -1,22 +1,59 @@
-# Strava Dashboard Docu
-## step 1: clone github project
-..* search for user "rotti" on github
-..* select project korekuta
-..* clone project by copying project url and executing git clone "url" in a shell
-## step 2: get authentication toxen for strava api
-..* create directory "config" with the command "mkdir config"
-..* swith to directory "config" with command "cd config"
-..* create the files "auth_code", "client_id" and "strava_secret" in the config directory with the command "touch auth_code"
-..* register as a developer at strava.com and create your project
-..* logon to the strave website "https://www.strava.com/settings/api" to get your client_id and strava_secret
-..* copy your client_id from strava in the file "client_id" and your your strava secret in the file "strava_secret" both as strings; to do so open the listed files with an editor like nedit using the command "nedit client_id"; save and close them once you're done
-..* edit the file token_helper.py deleting the # for comment as indicated in the code
-..* execute file "token_helper.py" with the command "python token_helper.py"; this will open a webbrowser. you have to login to Strava and allow Korekuta to connect to Strava; you will then get an "Unable to connect" failure. But you will receive your tempory code listed at the end of the url; it will look something like "http://localhost/token_exchange?state=mystate&code=1d1de858d2005b56e02d16d657cfad8bbc769a6f"
-..* copy the "code" as a string in the file "auth_code" in your config directory
-..* reset the the file token_helper.py marking comments with a # sign again 
-..* execute python token_helper.py from korekuta directory
-..* the script writes the access token into the config file access_token
+Grava - Analyse your Strava data in Grafana
+=============================
 
+Grava uses the [Strava API](https://strava.github.io/api/) to collect your personal activities. The activities are written inside a database and can be analysed afterwards.
+The used database [InfluxDB](https://www.influxdata.com/) is a time series database. [Grafana](http://grafana.org/) is used for visualizing and analysing the metrics of the activities.
+
+
+## Featureset
+* *token_helper.py*: helps to get your Strava authentication tokens
+* *filldb.py*: Reads all of your Strava activities and writes it into a InfluxDB database
+* *make_dashboards.py*: Reads JSON templates and creates Grafana dashboards 
+
+## How to see your Data in Grafana
+1. Clone this repository
+> git clone https://github.com/rotti/grava.git
+
+2. InfluxDB Installation
+TODO
+
+3. Grafana Installation
+TODO
+
+4. Python library Installation
+TODO
+
+pip install influxdb, xxxxxxxxxx
+
+5. Login to Grafana
+
+
+## Usage of token_helper.py
+Token helper gets your Strava access token and writes it to a file inside your authfile directory ("*./authfiles/access_token*"). It also provides help to get your code needed for the token exchange.
+
+### Steps
+1. Register as a developer at [strava.com](http://strava.com) and create your project to get your *ClientID* and your *Client Secret*.
+2. Write your *ClientID* inside the file "./authfiles/client_id"
+3. Write your *Client Secret* inside the file "./authfiles/client_id"
+4. Write your *exchange token* inside the file "./authfiles/auth_code". 
+
+To get your exchange token open a browser and use the following URL. Don't forget to put your *ClientID* inside the URL:
+> https://www.strava.com/oauth/authorize?client_id=**YOURCLIENTID**&response_type=code&redirect_uri=http://localhost/token_exchange&scope=write&state=mystate&approval_prompt=force
+
+Login with your Strava credentials and authorise your application. Afterwards you will receive and "Unable to connect" failure from your browser. Ignore it. You will receive your exchange token. It will loke something like "http://localhost/token_exchange?state=mystate&code=**1d1de858d2005b56e02d16d657cfad8bbc769a6f**". Paste the code to your file.
+
+*token_helper.py* can provide some help to get your exchange token. Uncomment the specified section inside the code and execute it afterwards. Don't forget to put the comments in again afterwards. It will open a browser for you and will put in the needed URL.
+
+5. Execute *token_helper.py* with 
+> python token_helper.py
+
+
+
+Find further help here: https://strava.github.io/api/v3/oauth/
+
+
+
+## Inspiration and additional useful URLs
 
 http://docs.grafana.org/installation/debian/
 
@@ -24,6 +61,10 @@ https://docs.influxdata.com/influxdb/v0.9/introduction/installation/
 
 http://www.andremiller.net/content/grafana-and-influxdb-quickstart-on-ubuntu
 
-pip install influxdb
-
 https://github.com/weaveworks/grafanalib
+
+https://groups.google.com/forum/m/#!forum/strava-api
+
+https://github.com/hozn/stravalib
+
+https://github.com/influxdata/influxdb-python
