@@ -34,16 +34,11 @@ Token helper gets your Strava access token and writes it to a file inside your a
 ### Steps
 1. Register as a developer at [strava.com](http://strava.com) and create your project to get your *ClientID* and your *Client Secret*.
 2. Write your *ClientID* inside the file
-
-> ./authfiles/client_id
-
+    > ./authfiles/client_id
 3. Write your *Client Secret* inside the file 
-
-> ./authfiles/client_id
-
+    > ./authfiles/client_id
 4. Write your *exchange token* inside the file 
-
-> ./authfiles/auth_code
+    > ./authfiles/auth_code
 
 To get your exchange token open a browser and use the following URL. Don't forget to put your *ClientID* inside the URL:
 > https://www.strava.com/oauth/authorize?client_id=YOURCLIENTID&response_type=code&redirect_uri=http://localhost/token_exchange&scope=write&state=mystate&approval_prompt=force
