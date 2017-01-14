@@ -2,15 +2,17 @@ Grava - Analyse your Strava data in Grafana
 =============================
 
 Grava uses the [Strava API](https://strava.github.io/api/) to collect your personal activities. The activities are written inside a database and can be analysed afterwards.
-The used database [InfluxDB](https://www.influxdata.com/) is a time series database. [Grafana](http://grafana.org/) is used for visualizing and analysing the metrics of the activities. The Tool is written in Python.
+The used database [InfluxDB](https://www.influxdata.com/) is a time series database. [Grafana](http://grafana.org/) is used for visualizing and analysing the metrics of the activities. The helper code is written in Python.
 
+# Disclaimer
+Grava is in a testing state. There are several issues and missing features. You are welcome to test it.
 
 ## Featureset
 * *token_helper.py*: helps to get your Strava authentication tokens
 * *filldb.py*: Reads all of your Strava activities and writes it into a InfluxDB database
 * *make_dashboards.py*: Reads JSON templates and creates Grafana dashboards 
 
-## How to see your Data in Grafana
+## How to see your Data with Grava
 **1. Clone this repository (Linux)**
   ```
   git clone https://github.com/rotti/grava.git
@@ -75,11 +77,13 @@ The used database [InfluxDB](https://www.influxdata.com/) is a time series datab
   > User: admin
   > Passwort: admin
 
+  Do the Grafana configuration. Find further help here: https://docs.grafana.org/datasources/influxdb/
 
+  TODO: explain how to configure Grafana datasources
 
 
 ## Usage of token_helper.py
-Token helper gets your Strava access token and writes it to a file inside your authfile directory ("*./authfiles/access_token*"). It also provides help to get your code needed for the token exchange.
+Token helper gets your Strava *access token* and writes it to a file inside your authfile directory ("*./authfiles/access_token"*). It also provides help to get your code needed for the token exchange.
 
 ### Steps
 1. Register as a developer at [strava.com](http://strava.com) and create your project to get your *ClientID* and your *Client Secret*.
@@ -100,21 +104,41 @@ Token helper gets your Strava access token and writes it to a file inside your a
 To get your *exchange token* open a browser and use the following URL. Don't forget to put your *ClientID* inside the URL:
 > https://www.strava.com/oauth/authorize?client_id=YOURCLIENTID&response_type=code&redirect_uri=http://localhost/token_exchange&scope=write&state=mystate&approval_prompt=force
 
-Login with your Strava credentials and authorise your application. Afterwards you will receive and "Unable to connect" failure from your browser. Ignore it. You will receive your exchange token. It will loke something like 
+Login with your Strava credentials and authorise your application. Afterwards you will receive and "Unable to connect" failure from your browser. Ignore it. You will receive your *exchange token*. It will loke something like 
 > http://localhost/token_exchange?state=mystate&code=**1d1de858d2005b56e02d16d657cfad8bbc769a6f**
 
-Paste the code to your file.
+Paste the "code" to your file. It is your *exchange token* needed for step 4.
 
 *token_helper.py* can provide some help to get your *exchange token*. Uncomment the specified section inside the code and execute it afterwards. Don't forget to put the comments in again afterwards. It will open a browser for you and will put in the needed URL.
 
 Find further help here: https://strava.github.io/api/v3/oauth/
 
 
+## Missing Functionalities
+There are always missing features. Here is a small list of things Grava is missing.
+* Write better code. The never ending story, after all :)
+* Don't get all activities from Strava all the time. Grava should have the possibility to grab just new activities.
+* Set up the complete Grafana instance, not just dashboards. For example the data sources.
+* Deliver useful dashboards for analysing.
+* Write a script and try to install Grava without having the user to do stuff.
+
 
 ## Inspiration and additional useful URLs
 
 https://groups.google.com/forum/m/#!forum/strava-api
+
 http://www.andremiller.net/content/grafana-and-influxdb-quickstart-on-ubuntu
+
 https://github.com/weaveworks/grafanalib
+
 https://github.com/hozn/stravalib
+
 https://github.com/influxdata/influxdb-python
+
+http://play.grafana.org/
+
+https://grafana.net/
+
+https://docs.influxdata.com/influxdb/v0.8/api/query_language/
+
+
