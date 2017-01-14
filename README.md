@@ -16,7 +16,6 @@ The used database [InfluxDB](https://www.influxdata.com/) is a time series datab
 git clone https://github.com/rotti/grava.git
 ```
 
-
 2. InfluxDB: Linux Installation (Ubuntu)
 ```
 sudo apt-get update
