@@ -111,16 +111,8 @@ Find further help here: https://strava.github.io/api/v3/oauth/
 
 ## Inspiration and additional useful URLs
 
-http://docs.grafana.org/installation/debian/
-
-https://docs.influxdata.com/influxdb/v0.9/introduction/installation/
-
-http://www.andremiller.net/content/grafana-and-influxdb-quickstart-on-ubuntu
-
-https://github.com/weaveworks/grafanalib
-
 https://groups.google.com/forum/m/#!forum/strava-api
-
+http://www.andremiller.net/content/grafana-and-influxdb-quickstart-on-ubuntu
+https://github.com/weaveworks/grafanalib
 https://github.com/hozn/stravalib
-
 https://github.com/influxdata/influxdb-python
