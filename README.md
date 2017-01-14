@@ -12,10 +12,13 @@ The used database [InfluxDB](https://www.influxdata.com/) is a time series datab
 
 ## How to see your Data in Grafana
 1. Clone this repository
+
   ```
   git clone https://github.com/rotti/grava.git
   ```
+
 2. InfluxDB: Linux Installation (Ubuntu)
+
   ```
   sudo apt-get update
   curl -sL https://repos.influxdata.com/influxdb.key |  sudo apt-key add - source /etc/lsb-release echo "deb https://repos.influxdata.com/${DISTRIB_ID,,} ${DISTRIB_CODENAME} stable" | sudo tee /etc/apt/sources.list.d/influxdb.lis
