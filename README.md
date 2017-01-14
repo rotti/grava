@@ -93,7 +93,9 @@ Token helper gets your Strava access token and writes it to a file inside your a
 > ./authfiles/auth_code
 
 5. Execute *token_helper.py* with 
-> python token_helper.py
+  ```
+  python token_helper.py
+  ```
 
 To get your *exchange token* open a browser and use the following URL. Don't forget to put your *ClientID* inside the URL:
 > https://www.strava.com/oauth/authorize?client_id=YOURCLIENTID&response_type=code&redirect_uri=http://localhost/token_exchange&scope=write&state=mystate&approval_prompt=force
