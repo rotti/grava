@@ -35,6 +35,7 @@ Token helper gets your Strava access token and writes it to a file inside your a
 1. Register as a developer at [strava.com](http://strava.com) and create your project to get your *ClientID* and your *Client Secret*.
 2. Write your *ClientID* inside the file
 > ./authfiles/client_id
+
 3. Write your *Client Secret* inside the file 
 > ./authfiles/client_id
 
@@ -49,7 +50,6 @@ Login with your Strava credentials and authorise your application. Afterwards yo
 *token_helper.py* can provide some help to get your exchange token. Uncomment the specified section inside the code and execute it afterwards. Don't forget to put the comments in again afterwards. It will open a browser for you and will put in the needed URL.
 
 5. Execute *token_helper.py* with 
-
 > python token_helper.py
 
 
