@@ -13,7 +13,7 @@ influxhost = "localhost"
 influxport = "8086"
 influxuser = "root"
 influxpassword = "root"
-influxdbname = "strava"
+influxdbname = "test"
 
 strava = Client()
 fluxdb = InfluxDBClient(influxhost, influxport, influxuser, influxpassword, influxdbname)
@@ -21,6 +21,7 @@ fluxdb = InfluxDBClient(influxhost, influxport, influxuser, influxpassword, infl
 
 print "...create database: ", influxdbname
 fluxdb.create_database(influxdbname)
+
 
 
 def get_string_from_file(file):
@@ -37,12 +38,14 @@ def get_string_from_file(file):
 
 
 
+
 def convert_to_seconds(time):
     if not (' ' in time):
         h,m,s = re.split(':', time)
         return float(datetime.timedelta(hours=int(h),minutes=int(m),seconds=int(s)).total_seconds())
     else: 
         return float(0)
+
 
 
 
@@ -56,46 +59,98 @@ def convert_to_float(string):
 
 
 
-access_token = get_string_from_file('access_token')
-strava.access_token = access_token
+def boolean_to_string(boolean, string):
+    if boolean is True:
+        return string + ": yes"
+    else:
+        return string + ": no"
 
 
-athlete = strava.get_athlete()
-athletename = athlete.lastname + " " + athlete.firstname
 
-counter = 0
 
-print "...retreiving data from strava"
-#for activity in strava.get_activities(limit=2):
-for activity in strava.get_activities():
-    counter += 1
+def create_boolean_string_from_number(number, string):
+    if number > 0:
+        return string + ": yes"
+    else:
+        return string + ": no"
+
+
+
+
+def descriptive_heartrate(max_heartrate):
+    if (max_heartrate >= 175):
+        return "High"
+    elif (max_heartrate > 130) and (max_heartrate < 175):
+        return "Average"
+    else:
+        return "Low"
+
+
+
+
+def descriptive_temperature(avg_temp):
+    if avg_temp == -999:
+        return "None"
+    elif (avg_temp >= -100) and (avg_temp < 0):
+        return "Below zero"
+    elif (avg_temp >= 0) and (avg_temp <= 10):
+        return "Cold"
+    elif (avg_temp > 10) and (avg_temp <= 18):
+        return "Chilly"
+    elif (avg_temp > 18) and (avg_temp <= 24):
+        return "Pleasant"
+    elif (avg_temp > 24) and (avg_temp <= 30):
+        return "Warm"
+    elif (avg_temp > 30) and (avg_temp < 999):
+        return "Hot"
+    else:
+        return "None"
+        
+
+
+
+def descriptive_elapsed_time(time):
+    if time < 3600:
+        return "Short"
+    elif (time >= 3600) and (time < 18000):
+        return "Medium"
+    else:
+        return "Long"
+
+
+
+
+def descriptive_distance(distance):
+    if distance < 10000:
+        return "Short"
+    elif (distance >= 10000) and (distance < 50000):
+        return "Medium"
+    elif (distance >= 50000) and (distance < 100000):
+        return "Long"
+    else:
+        return "Gran Fondo"
  
-    distance = str(activity.distance)
-    elevation = str(activity.total_elevation_gain)
-    average_speed = str(activity.average_speed)
-    maximum_speed = str(activity.max_speed)
-    average_heartrate = str(activity.average_heartrate)
-    maximum_heartrate = str(activity.max_heartrate)
 
-    gear_name = str(activity.gear_id)
-    if not gear_name == "None":
-        gear_name = strava.get_gear(gear_name).name
 
-    elev_high = str(activity.elev_high)    
-    elev_low = str(activity.elev_low)    
 
-    calories = str(activity.calories)
-    kilojoules = str(activity.kilojoules)
-    start_time = str(activity.start_date)[11:16].replace(':', '')
-    kudos_count = str(activity.kudos_count)
-    achievement_count = str(activity.achievement_count)
-    comment_count= str(activity.comment_count)
-    athlete_count = str(activity.athlete_count)
-    pr_count = str(activity.pr_count)
-    average_temp = str(activity.average_temp)
-    average_watts = str(activity.average_watts)
+def descriptive_start_time(start_time):
+    if (start_time >= 500) and (start_time < 800):
+       return "Early morning"
+    elif (start_time >= 800) and (start_time < 1100):
+       return "Morning"
+    elif (start_time >= 1100) and (start_time < 1400):
+       return "Noon"
+    elif (start_time >= 1400) and (start_time < 1800):
+       return "Afternoon"
+    elif (start_time >= 1800) and (start_time < 2300):
+       return "Evening"
+    elif (start_time >= 2300) and (start_time < 500):
+       return "Night"
 
-    workout_type = str(activity.workout_type)
+
+
+
+def descriptive_workout_type(workout_type):
     if workout_type == "0":
         workout_type = str("Run: default")
     elif workout_type == "1":
@@ -111,7 +166,60 @@ for activity in strava.get_activities():
     elif workout_type == "11":
         workout_type = str("Ride: workout")
 
-         
+    return workout_type
+ 
+
+
+
+access_token = get_string_from_file('access_token')
+strava.access_token = access_token
+
+athlete = strava.get_athlete()
+athletename = athlete.lastname + " " + athlete.firstname
+
+counter = 0
+
+print "...retreiving data from strava"
+for activity in strava.get_activities(limit=3):
+#for activity in strava.get_activities():
+    counter += 1
+ 
+    distance = str(activity.distance)
+    straight_length = convert_to_float(distance[:-2])
+   
+    average_speed = str(activity.average_speed)
+    maximum_speed = str(activity.max_speed)
+    average_watts = str(activity.average_watts)
+   
+    average_heartrate = str(activity.average_heartrate)
+    maximum_heartrate = str(activity.max_heartrate)
+    
+    elapsed_time = convert_to_seconds(str(activity.elapsed_time))
+    start_time = str(activity.start_date)[11:16].replace(':', '')
+
+    gear_name = str(activity.gear_id)
+    if not gear_name == "None":
+        gear_name = strava.get_gear(gear_name).name
+
+    elevation = str(activity.total_elevation_gain)
+    elev_high = str(activity.elev_high)    
+    elev_low = str(activity.elev_low)    
+
+    calories = str(activity.calories)
+    kilojoules = str(activity.kilojoules)
+    
+    kudos_count = str(activity.kudos_count)
+    achievement_count = str(activity.achievement_count)
+    comment_count= str(activity.comment_count)
+    athlete_count = str(activity.athlete_count)
+    pr_count = str(activity.pr_count)
+   
+    average_temp = str(activity.average_temp)
+    avg_temp_desc = average_temp
+    if avg_temp_desc == "None":
+        avg_temp = int(-999)
+
+        
     d = [{
         'measurement': 'strava_activity',
             'tags': {
@@ -120,40 +228,30 @@ for activity in strava.get_activities():
                 #'location_city': u'{0.location_city}'.format(activity), #deprecated
                 #'location_country': u'{0.location_country}'.format(activity), #deprecated
                 'device_name': u'{0.device_name}'.format(activity),
-                'commute': u'{0.commute}'.format(activity),
-                'trainer': u'{0.trainer}'.format(activity),
-                'flagged': u'{0.flagged}'.format(activity),
+                'commute': boolean_to_string(activity.commute, "Commute"),
+                'trainer': boolean_to_string(activity.commute, "Trainer"),
+                'flagged': boolean_to_string(activity.flagged, "Flagged"),
+                'private': boolean_to_string(activity.private, "Private"),
+                'comment': create_boolean_string_from_number(int(activity.comment_count), "Was commented"),
+                'athlete': create_boolean_string_from_number((int(activity.athlete_count) - 1), "Was joint"), 
+                'achievement': create_boolean_string_from_number(int(activity.achievement_count), "Has achievements"),
+                'personal_records': create_boolean_string_from_number(int(activity.pr_count), "Has personal records"),
+                'kudos': create_boolean_string_from_number(int(activity.kudos_count), "Has Kudos"),
                 'activity_id': u'{0.id}'.format(activity),
                 'gear_name:': gear_name,
                 'activity_counter:': counter,
-                'tag_average_temp': convert_to_float(average_temp),
-                'tag_start_time': convert_to_float(start_time),
-                'tag_elev_high': convert_to_float(elev_high),
-                'tag_elev_low': convert_to_float(elev_low),
-                'tag_distance': convert_to_float(distance[:-2]),
-                'tag_total_elevation_gain': convert_to_float(elevation[:-2]),
-                'tag_average_speed': convert_to_float(average_speed[:-5]),
-                'tag_average_heartrate': convert_to_float(average_heartrate),
-                'tag_activity_time': u'{0.start_date}'.format(activity),
-                'tag_calories': convert_to_float(calories),
-                'tag_kilojoules': convert_to_float(kilojoules),
-                'tag_max_speed': convert_to_float(maximum_speed[:-6]),
-                'tag_max_heartrate': convert_to_float(maximum_heartrate),
-                'tag_average_watts': convert_to_float(average_watts),
-                'tag_elapsed_time': convert_to_seconds(u'{0.elapsed_time}'.format(activity)),
-                'tag_moving_time': convert_to_seconds(u'{0.moving_time}'.format(activity)),
-                'tag_comment_count': convert_to_float(comment_count), 
-                'tag_athlete_count': convert_to_float(athlete_count),
-                'tag_achievement_count': convert_to_float(achievement_count), 
-                'tag_pr_count': convert_to_float(pr_count),
-                'tag_kudos_count': convert_to_float(kudos_count),
-                'workout_type': workout_type,
+                'avg_temp': descriptive_temperature(avg_temp_desc),
+                'duration': descriptive_elapsed_time(int(elapsed_time)),
+                'time_of_day': descriptive_start_time(int(start_time)), 
+                'straight_length': descriptive_distance(int(straight_length)),
+                'max_heartrate': descriptive_heartrate(int(activity.max_heartrate)),
+                'workout_type': descriptive_workout_type(str(activity.workout_type)),
                 'athlete:': athletename,
                 'description': u'{0.description}'.format(activity)
              },
             'time': u'{0.start_date}'.format(activity),
             'fields': {
-                'distance': convert_to_float(distance[:-2]),
+                'distance': straight_length,
                 'total_elevation_gain': convert_to_float(elevation[:-2]),
                 'average_speed': convert_to_float(average_speed[:-5]),
                 'average_heartrate': convert_to_float(average_heartrate),
@@ -172,13 +270,13 @@ for activity in strava.get_activities():
                 'pr_count': convert_to_float(pr_count),
                 'average_temp': convert_to_float(average_temp),
                 'average_watts': convert_to_float(average_watts),
-                'elapsed_time': convert_to_seconds(u'{0.elapsed_time}'.format(activity)),
+                'elapsed_time': elapsed_time,
                 'moving_time': convert_to_seconds(u'{0.moving_time}'.format(activity))
              }
       }]
         
 
-    #print d
+    print d
     print "...write activity id '" + u'{0.id}'.format(activity) + "' of user '" + athletename + "' as entry '" + str(counter) + "' to database:",influxdbname 
     fluxdb.write_points(d)
 
