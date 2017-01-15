@@ -13,7 +13,7 @@ influxhost = "localhost"
 influxport = "8086"
 influxuser = "root"
 influxpassword = "root"
-influxdbname = "strava"
+influxdbname = "test"
 
 strava = Client()
 fluxdb = InfluxDBClient(influxhost, influxport, influxuser, influxpassword, influxdbname)
@@ -21,6 +21,15 @@ fluxdb = InfluxDBClient(influxhost, influxport, influxuser, influxpassword, infl
 
 print "...create database: ", influxdbname
 fluxdb.create_database(influxdbname)
+
+#XXX
+query = "select first(counter) from strava_activity"
+print "...queying last activity from DB" + influxdbname + " with query: '" + query + "'"
+result = list(fluxdb.query(query))
+for row in result[0]: last_activity_time = row.get("time")
+print "...last activity in DB" + influxdbname + "is: ", last_activity_time
+
+
 
 
 
@@ -182,8 +191,8 @@ athletename = athlete.lastname + " " + athlete.firstname
 counter = 0
 
 print "...retreiving data from strava"
-#for activity in strava.get_activities(limit=3):
-for activity in strava.get_activities():
+for activity in strava.get_activities(limit=5):
+#for activity in strava.get_activities():
     counter += 1
  
     distance = str(activity.distance)
@@ -243,20 +252,20 @@ for activity in strava.get_activities():
                 'personal_records': create_boolean_string_from_number(int(activity.pr_count), "Has personal records"),
                 'kudos': create_boolean_string_from_number(int(activity.kudos_count), "Has Kudos"),
                 'activity_id': u'{0.id}'.format(activity),
-                'gear_name:': gear_name,
-                'activity_counter:': counter,
+                'gear_name': gear_name,
                 'avg_temp': descriptive_temperature(avg_temp_desc),
                 'duration': descriptive_elapsed_time(int(elapsed_time)),
                 'time_of_day': descriptive_start_time(int(start_time)), 
                 'straight_length': descriptive_distance(int(straight_length)),
                 'max_heartrate': descriptive_heartrate(max_heartrate),
                 'workout_type': descriptive_workout_type(str(activity.workout_type)),
-                'athlete:': athletename,
+                'athlete': athletename,
                 'description': u'{0.description}'.format(activity)
              },
             'time': u'{0.start_date}'.format(activity),
             'fields': {
                 'distance': straight_length,
+                'counter': int(counter),
                 'total_elevation_gain': convert_to_float(elevation[:-2]),
                 'average_speed': convert_to_float(average_speed[:-5]),
                 'average_heartrate': convert_to_float(average_heartrate),
