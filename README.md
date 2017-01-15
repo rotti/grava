@@ -6,14 +6,14 @@ The used database [InfluxDB](https://www.influxdata.com/) is a time series datab
 
 **Grava is not designed to run on public servers or should be accessable from the internet. It should run in your protected network. It handles data. Be careful. Keep your secrets to yourself and don't share data or at least careful. Send people to Strava for public accessability.**
 
-## Disclaimer
-Grava is in a testing state. There are several issues and missing features. You are welcome to test it.
-Be aware that *filldb.py** pulls all your activities right now. For testing place a *limit* to the query.
+## Status
+Grava is in a developing/testing state. There are several issues and missing features. You are welcome to test it.
+For testing place a *limit* to the query and use a test database.
 
 ## Featureset
 * *token_helper.py*: helps to get your Strava authentication tokens
-* *filldb.py*: Reads all of your Strava activities and writes it into a InfluxDB database
-* *make_dashboards.py*: Reads JSON templates and creates Grafana dashboards 
+* *filldb.py*: Reads your Strava activities and writes it into a InfluxDB database
+* *make_dashboards.py*: Reads JSON templates and creates Grafana dashboards. #Status: proof of concept
 
 ## How to see your Data with Grava
 **1. Clone this repository (Linux)**
@@ -120,9 +120,9 @@ Find further help here: https://strava.github.io/api/v3/oauth/
 ## Missing Functionalities
 There are always missing features. Here is a small list of things Grava is missing.
 * Write better code. The never ending story, after all :)
-* Delete DB rows when activity was deleted after *dbfill* at Strava.
-* Set up the complete Grafana instance, not just dashboards. For example the data sources.
 * Deliver useful dashboards for analysing.
+* Set up the complete Grafana instance, not just dashboards. For example the data sources.
+* Delete DB rows when activity was deleted after *dbfill* at Strava.
 * Write a script and try to install Grava without having the user to do stuff.
 
 
@@ -138,10 +138,12 @@ https://github.com/hozn/stravalib
 
 https://github.com/influxdata/influxdb-python
 
+http://influxdb-python.readthedocs.io/en/latest/examples.html
+
+https://docs.influxdata.com/influxdb/v0.8/api/query_language/
+
 http://play.grafana.org/
 
 https://grafana.net/
-
-https://docs.influxdata.com/influxdb/v0.8/api/query_language/
 
 
