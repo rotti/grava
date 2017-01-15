@@ -13,7 +13,7 @@ influxhost = "localhost"
 influxport = "8086"
 influxuser = "root"
 influxpassword = "root"
-influxdbname = "test"
+influxdbname = "strava"
 
 strava = Client()
 fluxdb = InfluxDBClient(influxhost, influxport, influxuser, influxpassword, influxdbname)
@@ -82,8 +82,10 @@ def descriptive_heartrate(max_heartrate):
         return "High"
     elif (max_heartrate > 130) and (max_heartrate < 175):
         return "Average"
-    else:
+    elif (max_heartrate <= 129) and (max_heartrate < 50):
         return "Low"
+    else:
+        return "None"
 
 
 
@@ -180,8 +182,8 @@ athletename = athlete.lastname + " " + athlete.firstname
 counter = 0
 
 print "...retreiving data from strava"
-for activity in strava.get_activities(limit=3):
-#for activity in strava.get_activities():
+#for activity in strava.get_activities(limit=3):
+for activity in strava.get_activities():
     counter += 1
  
     distance = str(activity.distance)
@@ -193,6 +195,9 @@ for activity in strava.get_activities(limit=3):
    
     average_heartrate = str(activity.average_heartrate)
     maximum_heartrate = str(activity.max_heartrate)
+    max_heartrate = maximum_heartrate
+    if max_heartrate == "None":
+        max_heartrate = int(-999)
     
     elapsed_time = convert_to_seconds(str(activity.elapsed_time))
     start_time = str(activity.start_date)[11:16].replace(':', '')
@@ -244,7 +249,7 @@ for activity in strava.get_activities(limit=3):
                 'duration': descriptive_elapsed_time(int(elapsed_time)),
                 'time_of_day': descriptive_start_time(int(start_time)), 
                 'straight_length': descriptive_distance(int(straight_length)),
-                'max_heartrate': descriptive_heartrate(int(activity.max_heartrate)),
+                'max_heartrate': descriptive_heartrate(max_heartrate),
                 'workout_type': descriptive_workout_type(str(activity.workout_type)),
                 'athlete:': athletename,
                 'description': u'{0.description}'.format(activity)
@@ -276,7 +281,7 @@ for activity in strava.get_activities(limit=3):
       }]
         
 
-    print d
+    #print d
     print "...write activity id '" + u'{0.id}'.format(activity) + "' of user '" + athletename + "' as entry '" + str(counter) + "' to database:",influxdbname 
     fluxdb.write_points(d)
 
