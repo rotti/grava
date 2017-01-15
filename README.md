@@ -120,7 +120,7 @@ Find further help here: https://strava.github.io/api/v3/oauth/
 ## Missing Functionalities
 There are always missing features. Here is a small list of things Grava is missing.
 * Write better code. The never ending story, after all :)
-* Don't get all activities from Strava all the time. Grava should have the possibility to grab just new activities.
+* Delete DB rows when activity was deleted after *dbfill* at Strava.
 * Set up the complete Grafana instance, not just dashboards. For example the data sources.
 * Deliver useful dashboards for analysing.
 * Write a script and try to install Grava without having the user to do stuff.
