@@ -6,8 +6,9 @@ The used database [InfluxDB](https://www.influxdata.com/) is a time series datab
 
 **Grava is not designed to run on public servers or should be accessable from the internet. It should run in your protected network. It handles data. Be careful. Keep your secrets to yourself and don't share data or at least careful. Send people to Strava for public accessability.**
 
-# Disclaimer
+## Disclaimer
 Grava is in a testing state. There are several issues and missing features. You are welcome to test it.
+Be aware that *filldb.py** pulls all your activities right now. For testing place a *limit* to the query.
 
 ## Featureset
 * *token_helper.py*: helps to get your Strava authentication tokens
@@ -88,17 +89,17 @@ Grava is in a testing state. There are several issues and missing features. You 
 Token helper gets your Strava *access token* and writes it to a file inside your authfile directory ("*./authfiles/access_token"*). It also provides help to get your code needed for the token exchange.
 
 ### Steps
-1. Register as a developer at [strava.com](http://strava.com) and create your project to get your *ClientID* and your *Client Secret*.
-2. Write your *ClientID* inside the file
+**1.** Register as a developer at [strava.com](http://strava.com) and create your project to get your *ClientID* and your *Client Secret*.
+**2.** Write your *ClientID* inside the file
 > ./authfiles/client_id
 
-3. Write your *Client Secret* inside the file 
+**3.** Write your *Client Secret* inside the file 
 > ./authfiles/client_id
 
-4. Write your *exchange token* inside the file 
+**4.** Write your *exchange token* inside the file 
 > ./authfiles/auth_code
 
-5. Execute *token_helper.py* with 
+**5.** Execute *token_helper.py* with 
   ```
   python token_helper.py
   ```
@@ -109,7 +110,7 @@ To get your *exchange token* open a browser and use the following URL. Don't for
 Login with your Strava credentials and authorise your application. Afterwards you will receive and "Unable to connect" failure from your browser. Ignore it. You will receive your *exchange token*. It will loke something like 
 > http://localhost/token_exchange?state=mystate&code=**1d1de858d2005b56e02d16d657cfad8bbc769a6f**
 
-Paste the "code" to your file. It is your *exchange token* needed for step 4.
+Paste the "code" to your file. It is your *exchange token* needed for **step 4**.
 
 *token_helper.py* can provide some help to get your *exchange token*. Uncomment the specified section inside the code and execute it afterwards. Don't forget to put the comments in again afterwards. It will open a browser for you and will put in the needed URL.
 
