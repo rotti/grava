@@ -11,7 +11,7 @@ influxhost = "localhost"
 influxport = "8086"
 influxuser = "root"
 influxpassword = "root"
-influxdbname = "strava"
+influxdbname = "test"
 
 strava = Client()
 fluxdb = InfluxDBClient(influxhost, influxport, influxuser, influxpassword, influxdbname)
@@ -87,7 +87,7 @@ def convert_to_float(string):
 
 
 
-def boolean_to_string(boolean, string):
+def descriptive_bool(boolean, string):
     if boolean is True:
         return string + ": yes"
     else:
@@ -96,7 +96,7 @@ def boolean_to_string(boolean, string):
 
 
 
-def create_boolean_string_from_number(number, string):
+def descriptive_bool_from_count(number, string):
     if number > 0:
         return string + ": yes"
     else:
@@ -120,62 +120,62 @@ def descriptive_heartrate(max_heartrate):
 
 def descriptive_temperature(avg_temp):
     if avg_temp == -999:
-        return "None"
+        return str("None")
     elif (avg_temp >= -100) and (avg_temp < 0):
-        return "Below zero"
+        return str("Below zero")
     elif (avg_temp >= 0) and (avg_temp <= 10):
-        return "Cold"
+        return str("Cold")
     elif (avg_temp > 10) and (avg_temp <= 18):
-        return "Chilly"
+        return str("Chilly")
     elif (avg_temp > 18) and (avg_temp <= 24):
-        return "Pleasant"
+        return str("Pleasant")
     elif (avg_temp > 24) and (avg_temp <= 30):
-        return "Warm"
+        return str("Warm")
     elif (avg_temp > 30) and (avg_temp < 999):
-        return "Hot"
+        return str("Hot")
     else:
-        return "None"
+        return str("None")
         
 
 
 
 def descriptive_elapsed_time(time):
     if time < 3600:
-        return "Short"
+        return str("Short")
     elif (time >= 3600) and (time < 18000):
-        return "Medium"
+        return str("Medium")
     else:
-        return "Long"
+        return str("Long")
 
 
 
 
 def descriptive_distance(distance):
     if distance < 10000:
-        return "Short"
+        return str("Short")
     elif (distance >= 10000) and (distance < 50000):
-        return "Medium"
+        return str("Medium")
     elif (distance >= 50000) and (distance < 100000):
-        return "Long"
+        return str("Long")
     else:
-        return "Gran Fondo"
+        return str("Gran Fondo")
  
 
 
 
 def descriptive_start_time(start_time):
     if (start_time >= 500) and (start_time < 800):
-       return "Early morning"
+       return str("Early morning")
     elif (start_time >= 800) and (start_time < 1100):
-       return "Morning"
+       return str("Morning")
     elif (start_time >= 1100) and (start_time < 1400):
-       return "Noon"
+       return str("Noon")
     elif (start_time >= 1400) and (start_time < 1800):
-       return "Afternoon"
+       return str("Afternoon")
     elif (start_time >= 1800) and (start_time < 2300):
-       return "Evening"
+       return str("Evening")
     elif (start_time >= 2300) and (start_time < 500):
-       return "Night"
+       return str("Night")
 
 
 
@@ -205,10 +205,15 @@ def write_data_in_db(db_row):
 
 
 def get_and_normalize_gravadata(counter, last_strava_activity):
-    
+    athlete = strava.get_athlete()
+    athletename = athlete.lastname + " " + athlete.firstname
+
+    activity_count = 0
+
     #for activity in strava.get_activities(limit=5):
     for activity in strava.get_activities(after=str(last_strava_activity)):
         counter += 1
+        activity_count += 1
  
         distance = str(activity.distance)
         straight_length = convert_to_float(distance[:-2])
@@ -257,15 +262,15 @@ def get_and_normalize_gravadata(counter, last_strava_activity):
                     #'location_city': u'{0.location_city}'.format(activity), #deprecated
                     #'location_country': u'{0.location_country}'.format(activity), #deprecated
                     'device_name': u'{0.device_name}'.format(activity),
-                    'commute': boolean_to_string(activity.commute, "Commute"),
-                    'trainer': boolean_to_string(activity.commute, "Trainer"),
-                    'flagged': boolean_to_string(activity.flagged, "Flagged"),
-                    'private': boolean_to_string(activity.private, "Private"),
-                    'comment': create_boolean_string_from_number(int(activity.comment_count), "Was commented"),
-                    'athlete': create_boolean_string_from_number((int(activity.athlete_count) - 1), "Was joint"), 
-                    'achievement': create_boolean_string_from_number(int(activity.achievement_count), "Has achievements"),
-                    'personal_records': create_boolean_string_from_number(int(activity.pr_count), "Has personal records"),
-                    'kudos': create_boolean_string_from_number(int(activity.kudos_count), "Has Kudos"),
+                    'commute': descriptive_bool(activity.commute, "Commute"),
+                    'trainer': descriptive_bool(activity.commute, "Trainer"),
+                    'flagged': descriptive_bool(activity.flagged, "Flagged"),
+                    'private': descriptive_bool(activity.private, "Private"),
+                    'comment': descriptive_bool_from_count(int(activity.comment_count), "Was commented"),
+                    'athlete': descriptive_bool_from_count((int(activity.athlete_count) - 1), "Was joint"), 
+                    'achievement': descriptive_bool_from_count(int(activity.achievement_count), "Has achievements"),
+                    'personal_records': descriptive_bool_from_count(int(activity.pr_count), "Has personal records"),
+                    'kudos': descriptive_bool_from_count(int(activity.kudos_count), "Has Kudos"),
                     'activity_id': u'{0.id}'.format(activity),
                     'gear_name': gear_name,
                     'avg_temp': descriptive_temperature(avg_temp_desc),
@@ -309,25 +314,23 @@ def get_and_normalize_gravadata(counter, last_strava_activity):
         print "...write activity id '" + u'{0.id}'.format(activity) + "' of user '" + athletename + "' to database:",influxdbname
         write_data_in_db(db_row)
 
+    return int(activity_count)
 
 ######### Do stuff here ############
 
 print "...initializing database"
 gravadata_list = initialise_db()
-print "XXXX ", gravadata_list
 
 print "...reading Strava API access token"
 access_token = get_string_from_file('access_token')
 strava.access_token = access_token
 
-# XXX ugly
-athlete = strava.get_athlete()
-athletename = athlete.lastname + " " + athlete.firstname
+print "...retreiving data from strava API and normalize. looking for new activities since", gravadata_list[1]
+entry_count = get_and_normalize_gravadata(gravadata_list[0], gravadata_list[1])
 
-
-print "...retreiving data from strava API and normalize. taking activities after ", gravadata_list[1]
-get_and_normalize_gravadata(gravadata_list[0], gravadata_list[1])
-
-print "...finished filling the database:", influxdbname    
+if entry_count == 0:
+    print "...no new activities. finishing"    
+else:
+    print "...finished filling the database:", influxdbname    
 
 
