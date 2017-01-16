@@ -10,19 +10,34 @@ port = "3000"
 dashboard_path = "./dashboards/"
 organistation = "Grava"
 
-strafana = GrafanaClient((user, password), host=host, port=port)
+grava = GrafanaClient((user, password), host=host, port=port)
 
 #XXX move to make_datasource.py
-strafana.org.replace(name=organistation)
+grava.org.replace(name=organistation)
 
-
-dashboards = glob.glob('dashboard_path + "*.json"')
+# dashboards
+#dashboards = glob.glob('dashboard_path + "*.json"')
+dashboards = glob.glob('./dashboards/*.json')
 print "... dashboards loaded", dashboards
 
 for db in dashboards:
     with open(db) as dash_json:
         dashboard = json.load(dash_json)
     print "... creating dashboard ", dashboard
-    strafana.dashboards.db.create(dashboard=dashboard, overwrite=True)
+    grava.dashboards.db.create(dashboard=dashboard, overwrite=True)
+
+
+#XXXX
+datasource = {
+    "name":"test_datasource",
+    "type":"graphite",
+    "url":"http://mydatasource.com",
+    "access":"proxy",
+    "foo":"bar"
+}
+
+foo = {"name":"test","type":"influxdb_08","url":"http://localhost:8086","access":"proxy","isDefault":"true","database":"asd","user":"asd","password":"asd"}
+
+grava.datasources.create("")
 
 
