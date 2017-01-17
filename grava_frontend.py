@@ -1,6 +1,8 @@
 import requests
 import os
 import json
+import glob
+#import sys
 
 session = requests.Session()
 headers = {'content-type': 'application/json;charset=UTF-8'}
@@ -53,6 +55,26 @@ else:
     print "...skipping create datasource."
 
 
+#dashboards = glob.glob('./dashboards/*.json')
+dashboards = glob.glob('./simple.json')
+print "...dashboards loaded", dashboards
+api_url_dashboards = grafana_auth_url + "/api/dashboards/db"
 
-#curl 'http://admin:admin@192.168.99.100:3000/api/datasources' -X POST -H 'Content-Type: application/json;charset=UTF-8' --data-binary '{"name":"localGraphite","type":"graphite","url":"http://192.168.99.100","access":"proxy","isDefault":true,"database":"asd"}'
+for db in dashboards:
+    with open(db) as dash_json:
+        dashboard = json.load(dash_json)
+        print "dashboard", type(dashboard)
+        dashdata = {}
+        dashdata ['dashboard'] = dashboard
+        #dashdata = json.dumps(dashdata)
+        print "XXX", type(dashdata)
+    #print "... creating dashboard ", dashboard
+    post_dashboard = session.post(url=api_url_dashboards, data=json.dumps(dashboard), headers=headers)
+    #post_dashboard = session.post(url=api_url_dashboards, data=dashboard, headers=headers)
+    print "XXX", post_dashboard
+
+
+
+
+
 
