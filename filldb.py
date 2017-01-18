@@ -2,6 +2,7 @@ from influxdb import InfluxDBClient
 import os
 import re
 import datetime
+import calendar
 from stravalib.client import Client
 
 ######### Variables ############
@@ -28,7 +29,7 @@ def initialise_db():
     print "...queying last activity from DB" + influxdbname + " with query: '" + query + "'"
 
     result = list(fluxdb.query(query))
-    print "...receiving result ", result
+    print "...received result "
 
     db_results = []
     if result:
@@ -87,20 +88,20 @@ def convert_to_float(string):
 
 
 
-def descriptive_bool(boolean, string):
+def descriptive_bool(boolean):
     if boolean is True:
-        return string + ": yes"
+        return "yes"
     else:
-        return string + ": no"
+        return "no"
 
 
 
 
-def descriptive_bool_from_count(number, string):
+def descriptive_bool_from_count(number):
     if number > 0:
-        return string + ": yes"
+        return "yes"
     else:
-        return string + ": no"
+        return "no"
 
 
 
@@ -210,8 +211,8 @@ def get_and_normalize_gravadata(counter, last_strava_activity):
 
     activity_count = 0
 
-    #for activity in strava.get_activities(limit=5):
-    for activity in strava.get_activities(after=str(last_strava_activity)):
+    for activity in strava.get_activities(limit=5):
+    #for activity in strava.get_activities(after=str(last_strava_activity)):
         counter += 1
         activity_count += 1
  
@@ -261,21 +262,24 @@ def get_and_normalize_gravadata(counter, last_strava_activity):
                     'type': u'{0.type}'.format(activity),
                     #'location_city': u'{0.location_city}'.format(activity), #deprecated
                     #'location_country': u'{0.location_country}'.format(activity), #deprecated
-                    'device_name': u'{0.device_name}'.format(activity),
-                    'commute': descriptive_bool(activity.commute, "Commute"),
-                    'trainer': descriptive_bool(activity.commute, "Trainer"),
-                    'flagged': descriptive_bool(activity.flagged, "Flagged"),
-                    'private': descriptive_bool(activity.private, "Private"),
-                    'comment': descriptive_bool_from_count(int(activity.comment_count), "Was commented"),
-                    'athlete': descriptive_bool_from_count((int(activity.athlete_count) - 1), "Was joint"), 
-                    'achievement': descriptive_bool_from_count(int(activity.achievement_count), "Has achievements"),
-                    'personal_records': descriptive_bool_from_count(int(activity.pr_count), "Has personal records"),
-                    'kudos': descriptive_bool_from_count(int(activity.kudos_count), "Has Kudos"),
+                    'tracking_device_name': u'{0.device_name}'.format(activity),
+                    'has_commute': descriptive_bool(activity.commute),
+                    'was_on_trainer': descriptive_bool(activity.commute),
+                    'is_flagged': descriptive_bool(activity.flagged),
+                    'is_private': descriptive_bool(activity.private),
+                    'has_comment': descriptive_bool_from_count(int(activity.comment_count)),
+                    'was_with_other_athlete': descriptive_bool_from_count((int(activity.athlete_count) - 1)), 
+                    'has_achievement': descriptive_bool_from_count(int(activity.achievement_count)),
+                    'has_personal_records': descriptive_bool_from_count(int(activity.pr_count)),
+                    'has_kudos': descriptive_bool_from_count(int(activity.kudos_count)),
                     'activity_id': u'{0.id}'.format(activity),
+                    'year': activity.start_date.year,
+                    'month': activity.start_date.month,
+                    'weekday': calendar.day_name[activity.start_date.weekday()],
+                    'time_of_day': descriptive_start_time(int(start_time)), 
                     'gear_name': gear_name,
                     'avg_temp': descriptive_temperature(avg_temp_desc),
                     'duration': descriptive_elapsed_time(int(elapsed_time)),
-                    'time_of_day': descriptive_start_time(int(start_time)), 
                     'straight_length': descriptive_distance(int(straight_length)),
                     'max_heartrate': descriptive_heartrate(max_heartrate),
                     'workout_type': descriptive_workout_type(str(activity.workout_type)),
@@ -310,7 +314,7 @@ def get_and_normalize_gravadata(counter, last_strava_activity):
           }]
         
 
-        #print db_row
+        print db_row
         print "...write activity id '" + u'{0.id}'.format(activity) + "' of user '" + athletename + "' to database:",influxdbname
         write_data_in_db(db_row)
 

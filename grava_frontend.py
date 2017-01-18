@@ -55,22 +55,23 @@ else:
     print "...skipping create datasource."
 
 
-#dashboards = glob.glob('./dashboards/*.json')
-dashboards = glob.glob('./simple.json')
+dashboards = glob.glob('./dashboards/*.json')
+#dashboards = glob.glob('./simple.json')
 print "...dashboards loaded", dashboards
 api_url_dashboards = grafana_auth_url + "/api/dashboards/db"
 
 for db in dashboards:
     with open(db) as dash_json:
         dashboard = json.load(dash_json)
-        print "dashboard", type(dashboard)
-        dashdata = {}
-        dashdata ['dashboard'] = dashboard
+        #print "dashboard", type(dashboard)
+        #dashdata = {}
+        #dashdata ['dashboard'] = dashboard
         #dashdata = json.dumps(dashdata)
-        print "XXX", type(dashdata)
+        dashdata = { "dashboard": dashboard }
+        print "XXX", type(dashdata), dashdata
     #print "... creating dashboard ", dashboard
-    post_dashboard = session.post(url=api_url_dashboards, data=json.dumps(dashboard), headers=headers)
-    #post_dashboard = session.post(url=api_url_dashboards, data=dashboard, headers=headers)
+    #post_dashboard = session.post(url=api_url_dashboards, data=json.dumps(dashboard), headers=headers)
+    post_dashboard = session.post(url=api_url_dashboards, data=json.dumps(dashdata), headers=headers)
     print "XXX", post_dashboard
 
 
