@@ -12,7 +12,7 @@ influxhost = "localhost"
 influxport = "8086"
 influxuser = "root"
 influxpassword = "root"
-influxdbname = "test"
+influxdbname = "strava_keep"
 
 strava = Client()
 fluxdb = InfluxDBClient(influxhost, influxport, influxuser, influxpassword, influxdbname)
@@ -211,8 +211,8 @@ def get_and_normalize_gravadata(counter, last_strava_activity):
 
     activity_count = 0
 
-    for activity in strava.get_activities(limit=5):
-    #for activity in strava.get_activities(after=str(last_strava_activity)):
+    #for activity in strava.get_activities(limit=5):
+    for activity in strava.get_activities(after=str(last_strava_activity)):
         counter += 1
         activity_count += 1
  
@@ -314,7 +314,7 @@ def get_and_normalize_gravadata(counter, last_strava_activity):
           }]
         
 
-        print db_row
+        #print db_row
         print "...write activity id '" + u'{0.id}'.format(activity) + "' of user '" + athletename + "' to database:",influxdbname
         write_data_in_db(db_row)
 

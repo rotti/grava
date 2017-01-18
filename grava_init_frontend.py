@@ -2,7 +2,6 @@ import requests
 import os
 import json
 import glob
-#import sys
 
 session = requests.Session()
 headers = {'content-type': 'application/json;charset=UTF-8'}
@@ -56,24 +55,27 @@ else:
 
 
 dashboards = glob.glob('./dashboards/*.json')
-#dashboards = glob.glob('./simple.json')
-print "...dashboards loaded", dashboards
+print "...dashboard(s) loaded", dashboards
 api_url_dashboards = grafana_auth_url + "/api/dashboards/db"
 
 for db in dashboards:
     with open(db) as dash_json:
         dashboard = json.load(dash_json)
-        #print "dashboard", type(dashboard)
-        #dashdata = {}
-        #dashdata ['dashboard'] = dashboard
-        #dashdata = json.dumps(dashdata)
-        dashdata = { "dashboard": dashboard }
-        print "XXX", type(dashdata), dashdata
-    #print "... creating dashboard ", dashboard
-    #post_dashboard = session.post(url=api_url_dashboards, data=json.dumps(dashboard), headers=headers)
+        #https://github.com/grafana/grafana/issues/2816#issuecomment-248795297
+        dashdata = {}
+        dashdata["dashboard"] = dashboard
+        dashdata["overwrite"] = True
+        dashdata["inputs"] = [{}]
+        
     post_dashboard = session.post(url=api_url_dashboards, data=json.dumps(dashdata), headers=headers)
-    print "XXX", post_dashboard
+    print "...uploading dashboard '" + db , post_dashboard
 
+    
+#api_url_dashboards_slug = api_url_dashboards + "/strava_keep"
+#get_dashboard = session.get(url=api_url_dashboards_slug)
+#dashboard = get_dashboard.json()
+#print "get url", api_url_dashboards_slug
+#print "dash", dashboard
 
 
 

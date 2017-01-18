@@ -7,13 +7,15 @@ The used database [InfluxDB](https://www.influxdata.com/) is a time series datab
 **Grava is not designed to run on public servers or should be accessable from the internet. It should run in your protected network. It handles data. Be careful. Keep your secrets to yourself and don't share data or at least careful.**
 
 ## Status
+**Version 0.1**
+
 Grava is in a developing/testing state. There are several issues and missing features. You are welcome to test it.
 For testing place a *limit* to the query and use a test database.
 
 ## Featureset
 * *token_helper.py*: helps to get your Strava authentication tokens
-* *filldb.py*: Reads your Strava activities and writes it into a InfluxDB database
-* *make_dashboards.py*: Reads JSON templates and creates Grafana dashboards. #Status: proof of concept
+* *grava_init_backend.py*: Reads your Strava activities, normalise the data and writes it into a InfluxDB database
+* *grava_init_frontend.py*: Creates Grafana datasources and reads JSON templates to create Grafana dashboards 
 
 ## How to see your Data with Grava
 **1. Clone this repository (Linux)**
@@ -58,13 +60,13 @@ For testing place a *limit* to the query and use a test database.
 
 **6. Fill Database with Strava Activities**
   ```
-  python filldb.py
+  python grava_init_backend.py
   ```
   You will need your *Strava Access Token* to get your Strava activities. Use *token_helper.py" the get it.
 
-**7. Generate Grafana Dashboards (optional)**
+**7. Generate Grafana Datasources and Dashboards (optional)**
   ```
-  python make_dashboards.py
+  python grava_init_frontend.py
   ```
 
   Using the Dashboard Templates is optional. You may make your own. Find further help here: http://docs.grafana.org/
@@ -121,8 +123,6 @@ Find further help here: https://strava.github.io/api/v3/oauth/
 There are always missing features. Here is a small list of things Grava is missing.
 * Write better code. The never ending story, after all :)
 * Deliver useful dashboards for analysing.
-* Set up the complete Grafana instance, not just dashboards. For example the data sources.
-* Delete DB rows when activity was deleted after *dbfill* at Strava.
 * Write a script and try to install Grava without having the user to do stuff.
 
 
