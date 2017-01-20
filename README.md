@@ -106,7 +106,7 @@ Token helper gets your Strava *access token* and writes it to a file inside your
 > ./authfiles/client_id
 
 **3.** Write your *Client Secret* inside the file 
-> ./authfiles/client_id
+> ./authfiles/strava_secret
 
 **4.** Write your *exchange token* inside the file 
 > ./authfiles/auth_code
