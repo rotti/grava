@@ -12,7 +12,7 @@ influxhost = "localhost"
 influxport = "8086"
 influxuser = "root"
 influxpassword = "root"
-influxdbname = "strava_keep"
+influxdbname = "strava"
 
 strava = Client()
 fluxdb = InfluxDBClient(influxhost, influxport, influxuser, influxpassword, influxdbname)
