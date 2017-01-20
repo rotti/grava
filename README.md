@@ -6,6 +6,8 @@ The used database [InfluxDB](https://www.influxdata.com/) is a time series datab
 
 <a href=./dashboards/pure_numbers_db.png><img src="./dashboards/pure_numbers_db.png" align="left" height="210" width="384" ></a>
 <a href=./dashboards/ride_basics_db.png><img src="./dashboards/ride_basics_db.png" align="left" height="210" width="384" ></a>
+</br>
+
 
 
 **Grava is not designed to run on public servers or should be accessable from the internet. It should run in your protected network. It handles data. Be careful. Keep your secrets to yourself and don't share data or at least careful.**
