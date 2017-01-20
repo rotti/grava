@@ -122,7 +122,7 @@ Find further help here: https://strava.github.io/api/v3/oauth/
 ## Missing Functionalities
 There are always missing features. Here is a small list of things Grava is missing.
 * Write better code. The never ending story, after all :)
-* Deliver useful dashboards for analysing.
+* Deliver useful (more) dashboards for analysing.
 * Write a script and try to install Grava without having the user to do stuff.
 
 
