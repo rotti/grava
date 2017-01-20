@@ -34,6 +34,7 @@ def initialise_db():
     db_results = []
     if result:
         for row in result[0]: counter = row.get("last")
+        if counter == "None": counter = 0
         for row in result[0]: last_strava_activity = row.get("time")
         
         print "...last activity in DB " + influxdbname + " is: ", last_strava_activity
@@ -49,6 +50,7 @@ def initialise_db():
         db_results.append(counter)
         db_results.append(last_strava_activity)
 
+    print "CCC", db_results
     return db_results
 
 
