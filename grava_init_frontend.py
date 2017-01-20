@@ -10,15 +10,15 @@ headers = {'content-type': 'application/json;charset=UTF-8'}
 host = "localhost"
 user = "admin"
 password = "admin"
-
+grava_org = "Grava"
 
 grafana_port = ":3000"
 grafana_url = "http://" + host + grafana_port
 grafana_login_url = "http://" + host + grafana_port + "/login"
 grafana_auth_url = "http://" + user + ":" + password + "@" + host + grafana_port
 
-
 api_url_datasources = grafana_auth_url + "/api/datasources"
+api_url_org = grafana_auth_url + "/api/org"
 
 
 ifdb_database = "strava"
@@ -41,10 +41,14 @@ ifdb_source = {
 
 do_login = session.post(url=grafana_login_url, data=json.dumps({'user': user, 'password': password}), headers=headers)
 
+
+print "...setting up Grava"
+put_organisation = session.put(url=api_url_org, data=json.dumps({'name': grava_org}), headers=headers)
+
+
 print "...looking for existing datasources in", grafana_url
 get_datasources = session.get(url=api_url_datasources)
 datasources = get_datasources.json()
-
 
 if not datasources:
     post_datasource = session.post(url=api_url_datasources, data=json.dumps(ifdb_source), headers=headers)
@@ -71,11 +75,6 @@ for db in dashboards:
     print "...uploading dashboard '" + db , post_dashboard
 
     
-#api_url_dashboards_slug = api_url_dashboards + "/strava_keep"
-#get_dashboard = session.get(url=api_url_dashboards_slug)
-#dashboard = get_dashboard.json()
-#print "get url", api_url_dashboards_slug
-#print "dash", dashboard
 
 
 
