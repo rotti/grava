@@ -11,6 +11,9 @@ The used database [InfluxDB](https://www.influxdata.com/) is a time series datab
   <a href=./dashboards/ride_basics_db.png><img src="./dashboards/ride_basics_db.png" align="left" height="210" width="384" ></a> 
 </p>
 
+
+
+</br>
 ## Status
 **Version 0.1**
 
@@ -97,6 +100,7 @@ Token helper gets your Strava *access token* and writes it to a file inside your
 
 ### Steps
 **1.** Register as a developer at [strava.com](http://strava.com) and create your project to get your *ClientID* and your *Client Secret*.
+
 **2.** Write your *ClientID* inside the file
 > ./authfiles/client_id
 
