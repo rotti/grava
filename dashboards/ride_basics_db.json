@@ -48,7 +48,7 @@
   "rows": [
     {
       "collapse": false,
-      "height": 198,
+      "height": 273,
       "panels": [
         {
           "aliasColors": {
@@ -180,7 +180,7 @@
           "scroll": true,
           "showHeader": true,
           "sort": {
-            "col": null,
+            "col": 0,
             "desc": false
           },
           "span": 4,
@@ -200,6 +200,38 @@
             }
           ],
           "targets": [
+            {
+              "alias": "Number of Rides",
+              "dsType": "influxdb",
+              "groupBy": [],
+              "measurement": "strava_activity",
+              "policy": "default",
+              "query": "SELECT sum(\"elapsed_time\") FROM \"strava_activity\" WHERE $timeFilter GROUP BY time($interval) fill(null)",
+              "rawQuery": false,
+              "refId": "G",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "activity_time"
+                    ],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "count"
+                  }
+                ]
+              ],
+              "tags": [
+                {
+                  "key": "type",
+                  "operator": "=",
+                  "value": "Ride"
+                }
+              ]
+            },
             {
               "alias": "Achievements Collected",
               "dsType": "influxdb",
@@ -391,6 +423,70 @@
                   "value": "Ride"
                 }
               ]
+            },
+            {
+              "alias": "Maximum Speed (km/h)",
+              "dsType": "influxdb",
+              "groupBy": [],
+              "measurement": "strava_activity",
+              "policy": "default",
+              "query": "SELECT sum(\"elapsed_time\") FROM \"strava_activity\" WHERE $timeFilter GROUP BY time($interval) fill(null)",
+              "rawQuery": false,
+              "refId": "H",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "max_speed"
+                    ],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "max"
+                  }
+                ]
+              ],
+              "tags": [
+                {
+                  "key": "type",
+                  "operator": "=",
+                  "value": "Ride"
+                }
+              ]
+            },
+            {
+              "alias": "Maximum Heartrate (BPM)",
+              "dsType": "influxdb",
+              "groupBy": [],
+              "measurement": "strava_activity",
+              "policy": "default",
+              "query": "SELECT sum(\"elapsed_time\") FROM \"strava_activity\" WHERE $timeFilter GROUP BY time($interval) fill(null)",
+              "rawQuery": false,
+              "refId": "I",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "max_heartrate"
+                    ],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "max"
+                  }
+                ]
+              ],
+              "tags": [
+                {
+                  "key": "type",
+                  "operator": "=",
+                  "value": "Ride"
+                }
+              ]
             }
           ],
           "title": "",
@@ -408,7 +504,7 @@
     },
     {
       "collapse": false,
-      "height": 253,
+      "height": 215,
       "panels": [
         {
           "aliasColors": {
@@ -439,7 +535,7 @@
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
-          "span": 7,
+          "span": 6,
           "stack": false,
           "steppedLine": false,
           "targets": [
@@ -555,7 +651,7 @@
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
-          "span": 5,
+          "span": 6,
           "stack": false,
           "steppedLine": false,
           "targets": [
@@ -652,7 +748,7 @@
     },
     {
       "collapse": false,
-      "height": 253,
+      "height": 217,
       "panels": [
         {
           "aliasColors": {
@@ -841,7 +937,13 @@
                   }
                 ]
               ],
-              "tags": []
+              "tags": [
+                {
+                  "key": "type",
+                  "operator": "=",
+                  "value": "Ride"
+                }
+              ]
             }
           ],
           "thresholds": [],
@@ -889,7 +991,7 @@
     },
     {
       "collapse": false,
-      "height": 250,
+      "height": 212,
       "panels": [
         {
           "aliasColors": {
@@ -902,11 +1004,11 @@
           "legend": {
             "avg": false,
             "current": false,
-            "max": true,
+            "max": false,
             "min": false,
-            "show": true,
+            "show": false,
             "total": false,
-            "values": true
+            "values": false
           },
           "lines": false,
           "linewidth": 1,
@@ -956,7 +1058,13 @@
                   }
                 ]
               ],
-              "tags": []
+              "tags": [
+                {
+                  "key": "type",
+                  "operator": "=",
+                  "value": "Ride"
+                }
+              ]
             }
           ],
           "thresholds": [],
@@ -1156,5 +1264,5 @@
   },
   "timezone": "browser",
   "title": "Bikeride Basics",
-  "version": 2
+  "version": 4
 }
