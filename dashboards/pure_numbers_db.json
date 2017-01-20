@@ -1,8 +1,8 @@
 {
   "__inputs": [
     {
-      "name": "DS_STRAVA_KEEP",
-      "label": "strava",
+      "name": "DS_GRAVA_SOURCE",
+      "label": "Grava Source",
       "description": "",
       "type": "datasource",
       "pluginId": "influxdb",
@@ -52,7 +52,7 @@
             "rgba(237, 60, 43, 0.5)",
             "rgba(180, 27, 27, 0.9)"
           ],
-          "datasource": "${DS_STRAVA_KEEP}",
+          "datasource": "${DS_GRAVA_SOURCE}",
           "format": "short",
           "gauge": {
             "maxValue": 100,
@@ -163,7 +163,7 @@
             "rgba(85, 216, 103, 0.89)",
             "rgba(209, 34, 34, 0.9)"
           ],
-          "datasource": "${DS_STRAVA_KEEP}",
+          "datasource": "${DS_GRAVA_SOURCE}",
           "format": "short",
           "gauge": {
             "maxValue": 100,
@@ -274,7 +274,7 @@
             "rgba(173, 123, 82, 0.89)",
             "rgba(209, 34, 34, 0.9)"
           ],
-          "datasource": "${DS_STRAVA_KEEP}",
+          "datasource": "${DS_GRAVA_SOURCE}",
           "format": "short",
           "gauge": {
             "maxValue": 100,
@@ -385,7 +385,7 @@
             "rgba(108, 226, 239, 0.89)",
             "rgba(209, 34, 34, 0.9)"
           ],
-          "datasource": "${DS_STRAVA_KEEP}",
+          "datasource": "${DS_GRAVA_SOURCE}",
           "format": "short",
           "gauge": {
             "maxValue": 100,
@@ -496,7 +496,7 @@
             "rgba(208, 208, 208, 0.89)",
             "rgba(209, 34, 34, 0.9)"
           ],
-          "datasource": "${DS_STRAVA_KEEP}",
+          "datasource": "${DS_GRAVA_SOURCE}",
           "format": "short",
           "gauge": {
             "maxValue": 100,
@@ -607,7 +607,7 @@
             "rgba(228, 240, 8, 0.43)",
             "rgba(209, 34, 34, 0.9)"
           ],
-          "datasource": "${DS_STRAVA_KEEP}",
+          "datasource": "${DS_GRAVA_SOURCE}",
           "format": "short",
           "gauge": {
             "maxValue": 100,
@@ -708,7 +708,7 @@
       "repeatIteration": null,
       "repeatRowId": null,
       "showTitle": false,
-      "title": "Dashboard Row",
+      "title": "Row title",
       "titleSize": "h6"
     },
     {
@@ -724,7 +724,7 @@
             "rgba(237, 60, 43, 0.5)",
             "rgba(180, 27, 27, 0.9)"
           ],
-          "datasource": "${DS_STRAVA_KEEP}",
+          "datasource": "${DS_GRAVA_SOURCE}",
           "format": "dtdurations",
           "gauge": {
             "maxValue": 100,
@@ -835,7 +835,7 @@
             "rgba(85, 216, 103, 0.89)",
             "rgba(209, 34, 34, 0.9)"
           ],
-          "datasource": "${DS_STRAVA_KEEP}",
+          "datasource": "${DS_GRAVA_SOURCE}",
           "format": "dtdurations",
           "gauge": {
             "maxValue": 100,
@@ -946,7 +946,7 @@
             "rgba(173, 123, 82, 0.89)",
             "rgba(209, 34, 34, 0.9)"
           ],
-          "datasource": "${DS_STRAVA_KEEP}",
+          "datasource": "${DS_GRAVA_SOURCE}",
           "format": "dtdurations",
           "gauge": {
             "maxValue": 100,
@@ -1057,7 +1057,7 @@
             "rgba(108, 226, 239, 0.89)",
             "rgba(209, 34, 34, 0.9)"
           ],
-          "datasource": "${DS_STRAVA_KEEP}",
+          "datasource": "${DS_GRAVA_SOURCE}",
           "format": "dtdurations",
           "gauge": {
             "maxValue": 100,
@@ -1168,7 +1168,7 @@
             "rgba(208, 208, 208, 0.89)",
             "rgba(209, 34, 34, 0.9)"
           ],
-          "datasource": "${DS_STRAVA_KEEP}",
+          "datasource": "${DS_GRAVA_SOURCE}",
           "format": "dtdurations",
           "gauge": {
             "maxValue": 100,
@@ -1281,7 +1281,7 @@
             "rgba(228, 240, 8, 0.43)",
             "rgba(209, 34, 34, 0.9)"
           ],
-          "datasource": "${DS_STRAVA_KEEP}",
+          "datasource": "${DS_GRAVA_SOURCE}",
           "decimals": 2,
           "format": "s",
           "gauge": {
@@ -1385,7 +1385,7 @@
       "repeatIteration": null,
       "repeatRowId": null,
       "showTitle": false,
-      "title": "Dashboard Row",
+      "title": "Row title",
       "titleSize": "h6"
     },
     {
@@ -1401,7 +1401,7 @@
             "rgba(237, 60, 43, 0.5)",
             "rgba(180, 27, 27, 0.9)"
           ],
-          "datasource": "${DS_STRAVA_KEEP}",
+          "datasource": "${DS_GRAVA_SOURCE}",
           "format": "dtdurations",
           "gauge": {
             "maxValue": 100,
@@ -1501,7 +1501,7 @@
             "rgba(85, 216, 103, 0.89)",
             "rgba(209, 34, 34, 0.9)"
           ],
-          "datasource": "${DS_STRAVA_KEEP}",
+          "datasource": "${DS_GRAVA_SOURCE}",
           "format": "dtdurations",
           "gauge": {
             "maxValue": 100,
@@ -1614,7 +1614,7 @@
             "rgba(173, 123, 82, 0.89)",
             "rgba(209, 34, 34, 0.9)"
           ],
-          "datasource": "${DS_STRAVA_KEEP}",
+          "datasource": "${DS_GRAVA_SOURCE}",
           "format": "dtdurations",
           "gauge": {
             "maxValue": 100,
@@ -1710,7 +1710,7 @@
             "rgba(108, 226, 239, 0.89)",
             "rgba(209, 34, 34, 0.9)"
           ],
-          "datasource": "${DS_STRAVA_KEEP}",
+          "datasource": "${DS_GRAVA_SOURCE}",
           "format": "s",
           "gauge": {
             "maxValue": 100,
@@ -1823,7 +1823,7 @@
             "rgba(208, 208, 208, 0.89)",
             "rgba(209, 34, 34, 0.9)"
           ],
-          "datasource": "${DS_STRAVA_KEEP}",
+          "datasource": "${DS_GRAVA_SOURCE}",
           "format": "dtdurations",
           "gauge": {
             "maxValue": 100,
@@ -1936,7 +1936,7 @@
             "rgba(228, 240, 8, 0.43)",
             "rgba(209, 34, 34, 0.9)"
           ],
-          "datasource": "${DS_STRAVA_KEEP}",
+          "datasource": "${DS_GRAVA_SOURCE}",
           "decimals": 2,
           "format": "s",
           "gauge": {
@@ -2040,7 +2040,7 @@
       "repeatIteration": null,
       "repeatRowId": null,
       "showTitle": false,
-      "title": "Dashboard Row",
+      "title": "Row title",
       "titleSize": "h6"
     },
     {
@@ -2056,7 +2056,7 @@
             "rgba(237, 60, 43, 0.5)",
             "rgba(180, 27, 27, 0.9)"
           ],
-          "datasource": "${DS_STRAVA_KEEP}",
+          "datasource": "${DS_GRAVA_SOURCE}",
           "format": "velocitykmh",
           "gauge": {
             "maxValue": 100,
@@ -2162,7 +2162,7 @@
             "rgba(85, 216, 103, 0.89)",
             "rgba(209, 34, 34, 0.9)"
           ],
-          "datasource": "${DS_STRAVA_KEEP}",
+          "datasource": "${DS_GRAVA_SOURCE}",
           "format": "velocitykmh",
           "gauge": {
             "maxValue": 100,
@@ -2275,7 +2275,7 @@
             "rgba(173, 123, 82, 0.89)",
             "rgba(209, 34, 34, 0.9)"
           ],
-          "datasource": "${DS_STRAVA_KEEP}",
+          "datasource": "${DS_GRAVA_SOURCE}",
           "format": "velocitykmh",
           "gauge": {
             "maxValue": 100,
@@ -2371,7 +2371,7 @@
             "rgba(108, 226, 239, 0.89)",
             "rgba(209, 34, 34, 0.9)"
           ],
-          "datasource": "${DS_STRAVA_KEEP}",
+          "datasource": "${DS_GRAVA_SOURCE}",
           "format": "velocitykmh",
           "gauge": {
             "maxValue": 100,
@@ -2484,7 +2484,7 @@
             "rgba(208, 208, 208, 0.89)",
             "rgba(209, 34, 34, 0.9)"
           ],
-          "datasource": "${DS_STRAVA_KEEP}",
+          "datasource": "${DS_GRAVA_SOURCE}",
           "format": "velocitykmh",
           "gauge": {
             "maxValue": 100,
@@ -2597,7 +2597,7 @@
             "rgba(228, 240, 8, 0.43)",
             "rgba(209, 34, 34, 0.9)"
           ],
-          "datasource": "${DS_STRAVA_KEEP}",
+          "datasource": "${DS_GRAVA_SOURCE}",
           "decimals": 2,
           "format": "velocitykmh",
           "gauge": {
@@ -2701,7 +2701,7 @@
       "repeatIteration": null,
       "repeatRowId": null,
       "showTitle": false,
-      "title": "Dashboard Row",
+      "title": "Row title",
       "titleSize": "h6"
     },
     {
@@ -2717,7 +2717,7 @@
             "rgba(237, 60, 43, 0.5)",
             "rgba(180, 27, 27, 0.9)"
           ],
-          "datasource": "${DS_STRAVA_KEEP}",
+          "datasource": "${DS_GRAVA_SOURCE}",
           "decimals": null,
           "format": "lengthm",
           "gauge": {
@@ -2829,7 +2829,7 @@
             "rgba(85, 216, 103, 0.89)",
             "rgba(209, 34, 34, 0.9)"
           ],
-          "datasource": "${DS_STRAVA_KEEP}",
+          "datasource": "${DS_GRAVA_SOURCE}",
           "format": "lengthm",
           "gauge": {
             "maxValue": 100,
@@ -2940,7 +2940,7 @@
             "rgba(173, 123, 82, 0.89)",
             "rgba(209, 34, 34, 0.9)"
           ],
-          "datasource": "${DS_STRAVA_KEEP}",
+          "datasource": "${DS_GRAVA_SOURCE}",
           "format": "lengthm",
           "gauge": {
             "maxValue": 100,
@@ -3051,7 +3051,7 @@
             "rgba(108, 226, 239, 0.89)",
             "rgba(209, 34, 34, 0.9)"
           ],
-          "datasource": "${DS_STRAVA_KEEP}",
+          "datasource": "${DS_GRAVA_SOURCE}",
           "format": "lengthm",
           "gauge": {
             "maxValue": 100,
@@ -3162,7 +3162,7 @@
             "rgba(208, 208, 208, 0.89)",
             "rgba(209, 34, 34, 0.9)"
           ],
-          "datasource": "${DS_STRAVA_KEEP}",
+          "datasource": "${DS_GRAVA_SOURCE}",
           "format": "lengthm",
           "gauge": {
             "maxValue": 100,
@@ -3275,7 +3275,7 @@
             "rgba(228, 240, 8, 0.43)",
             "rgba(209, 34, 34, 0.9)"
           ],
-          "datasource": "${DS_STRAVA_KEEP}",
+          "datasource": "${DS_GRAVA_SOURCE}",
           "format": "lengthm",
           "gauge": {
             "maxValue": 100,
@@ -3378,12 +3378,12 @@
       "repeatIteration": null,
       "repeatRowId": null,
       "showTitle": false,
-      "title": "Dashboard Row",
+      "title": "Row title",
       "titleSize": "h6"
     },
     {
       "collapse": false,
-      "height": -235,
+      "height": -140,
       "panels": [
         {
           "cacheTimeout": null,
@@ -3394,7 +3394,7 @@
             "rgba(237, 60, 43, 0.5)",
             "rgba(180, 27, 27, 0.9)"
           ],
-          "datasource": "${DS_STRAVA_KEEP}",
+          "datasource": "${DS_GRAVA_SOURCE}",
           "format": "lengthm",
           "gauge": {
             "maxValue": 100,
@@ -3494,7 +3494,7 @@
             "rgba(85, 216, 103, 0.89)",
             "rgba(209, 34, 34, 0.9)"
           ],
-          "datasource": "${DS_STRAVA_KEEP}",
+          "datasource": "${DS_GRAVA_SOURCE}",
           "format": "lengthm",
           "gauge": {
             "maxValue": 100,
@@ -3607,7 +3607,7 @@
             "rgba(173, 123, 82, 0.89)",
             "rgba(209, 34, 34, 0.9)"
           ],
-          "datasource": "${DS_STRAVA_KEEP}",
+          "datasource": "${DS_GRAVA_SOURCE}",
           "format": "lengthm",
           "gauge": {
             "maxValue": 100,
@@ -3703,7 +3703,7 @@
             "rgba(108, 226, 239, 0.89)",
             "rgba(209, 34, 34, 0.9)"
           ],
-          "datasource": "${DS_STRAVA_KEEP}",
+          "datasource": "${DS_GRAVA_SOURCE}",
           "format": "lengthm",
           "gauge": {
             "maxValue": 100,
@@ -3816,7 +3816,7 @@
             "rgba(208, 208, 208, 0.89)",
             "rgba(209, 34, 34, 0.9)"
           ],
-          "datasource": "${DS_STRAVA_KEEP}",
+          "datasource": "${DS_GRAVA_SOURCE}",
           "format": "lengthm",
           "gauge": {
             "maxValue": 100,
@@ -3929,7 +3929,7 @@
             "rgba(228, 240, 8, 0.43)",
             "rgba(209, 34, 34, 0.9)"
           ],
-          "datasource": "${DS_STRAVA_KEEP}",
+          "datasource": "${DS_GRAVA_SOURCE}",
           "format": "lengthm",
           "gauge": {
             "maxValue": 100,
@@ -4037,7 +4037,7 @@
     },
     {
       "collapse": false,
-      "height": -23,
+      "height": -100,
       "panels": [
         {
           "cacheTimeout": null,
@@ -4048,7 +4048,7 @@
             "rgba(237, 60, 43, 0.5)",
             "rgba(180, 27, 27, 0.9)"
           ],
-          "datasource": "${DS_STRAVA_KEEP}",
+          "datasource": "${DS_GRAVA_SOURCE}",
           "format": "lengthm",
           "gauge": {
             "maxValue": 100,
@@ -4148,7 +4148,7 @@
             "rgba(85, 216, 103, 0.89)",
             "rgba(209, 34, 34, 0.9)"
           ],
-          "datasource": "${DS_STRAVA_KEEP}",
+          "datasource": "${DS_GRAVA_SOURCE}",
           "format": "lengthm",
           "gauge": {
             "maxValue": 100,
@@ -4261,7 +4261,7 @@
             "rgba(173, 123, 82, 0.89)",
             "rgba(209, 34, 34, 0.9)"
           ],
-          "datasource": "${DS_STRAVA_KEEP}",
+          "datasource": "${DS_GRAVA_SOURCE}",
           "format": "lengthm",
           "gauge": {
             "maxValue": 100,
@@ -4357,7 +4357,7 @@
             "rgba(108, 226, 239, 0.89)",
             "rgba(209, 34, 34, 0.9)"
           ],
-          "datasource": "${DS_STRAVA_KEEP}",
+          "datasource": "${DS_GRAVA_SOURCE}",
           "format": "lengthm",
           "gauge": {
             "maxValue": 100,
@@ -4470,7 +4470,7 @@
             "rgba(208, 208, 208, 0.89)",
             "rgba(209, 34, 34, 0.9)"
           ],
-          "datasource": "${DS_STRAVA_KEEP}",
+          "datasource": "${DS_GRAVA_SOURCE}",
           "format": "lengthm",
           "gauge": {
             "maxValue": 100,
@@ -4507,7 +4507,7 @@
               "to": "null"
             }
           ],
-          "span": 2,
+          "span": 4,
           "sparkline": {
             "fillColor": "rgba(31, 118, 189, 0.18)",
             "full": false,
@@ -4579,7 +4579,18 @@
       "repeatIteration": null,
       "repeatRowId": null,
       "showTitle": false,
-      "title": "Dashboard Row",
+      "title": "Row title",
+      "titleSize": "h6"
+    },
+    {
+      "collapse": false,
+      "height": -470,
+      "panels": [],
+      "repeat": null,
+      "repeatIteration": null,
+      "repeatRowId": null,
+      "showTitle": false,
+      "title": "Row title",
       "titleSize": "h6"
     }
   ],
@@ -4619,6 +4630,6 @@
     ]
   },
   "timezone": "browser",
-  "title": "Grava - pure numbers",
-  "version": 13
+  "title": "Pure numbers",
+  "version": 0
 }
