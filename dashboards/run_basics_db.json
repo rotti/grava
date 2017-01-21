@@ -66,7 +66,7 @@
             "current": false,
             "max": false,
             "min": false,
-            "show": false,
+            "show": true,
             "total": false,
             "values": false
           },
@@ -124,7 +124,7 @@
                 {
                   "key": "type",
                   "operator": "=",
-                  "value": "Ride"
+                  "value": "Run"
                 }
               ]
             }
@@ -132,7 +132,7 @@
           "thresholds": [],
           "timeFrom": null,
           "timeShift": null,
-          "title": "Dates and Times of Rides",
+          "title": "Dates and Times of Runs",
           "tooltip": {
             "shared": false,
             "sort": 0,
@@ -181,7 +181,7 @@
           "scroll": true,
           "showHeader": true,
           "sort": {
-            "col": 1,
+            "col": null,
             "desc": false
           },
           "span": 4,
@@ -202,7 +202,7 @@
           ],
           "targets": [
             {
-              "alias": "Number of Rides",
+              "alias": "Number of Runs",
               "dsType": "influxdb",
               "groupBy": [],
               "measurement": "strava_activity",
@@ -229,7 +229,7 @@
                 {
                   "key": "type",
                   "operator": "=",
-                  "value": "Ride"
+                  "value": "Run"
                 }
               ]
             },
@@ -261,7 +261,7 @@
                 {
                   "key": "type",
                   "operator": "=",
-                  "value": "Ride"
+                  "value": "Run"
                 }
               ]
             },
@@ -293,12 +293,12 @@
                 {
                   "key": "type",
                   "operator": "=",
-                  "value": "Ride"
+                  "value": "Run"
                 }
               ]
             },
             {
-              "alias": "Average PRs per Ride",
+              "alias": "Average PRs per Run",
               "dsType": "influxdb",
               "groupBy": [],
               "measurement": "strava_activity",
@@ -325,7 +325,7 @@
                 {
                   "key": "type",
                   "operator": "=",
-                  "value": "Ride"
+                  "value": "Run"
                 }
               ]
             },
@@ -357,12 +357,12 @@
                 {
                   "key": "type",
                   "operator": "=",
-                  "value": "Ride"
+                  "value": "Run"
                 }
               ]
             },
             {
-              "alias": "Average Kudos per Ride",
+              "alias": "Average Kudos per Run",
               "dsType": "influxdb",
               "groupBy": [],
               "measurement": "strava_activity",
@@ -389,12 +389,12 @@
                 {
                   "key": "type",
                   "operator": "=",
-                  "value": "Ride"
+                  "value": "Run"
                 }
               ]
             },
             {
-              "alias": "Average Athletes on Rides",
+              "alias": "Average Athletes on Runs",
               "dsType": "influxdb",
               "groupBy": [],
               "measurement": "strava_activity",
@@ -421,7 +421,7 @@
                 {
                   "key": "type",
                   "operator": "=",
-                  "value": "Ride"
+                  "value": "Run"
                 }
               ]
             },
@@ -453,7 +453,7 @@
                 {
                   "key": "type",
                   "operator": "=",
-                  "value": "Ride"
+                  "value": "Run"
                 }
               ]
             },
@@ -485,7 +485,7 @@
                 {
                   "key": "type",
                   "operator": "=",
-                  "value": "Ride"
+                  "value": "Run"
                 }
               ]
             }
@@ -581,7 +581,7 @@
                 {
                   "key": "type",
                   "operator": "=",
-                  "value": "Ride"
+                  "value": "Run"
                 }
               ]
             }
@@ -698,7 +698,7 @@
                 {
                   "key": "type",
                   "operator": "=",
-                  "value": "Ride"
+                  "value": "Run"
                 }
               ]
             }
@@ -827,7 +827,7 @@
                 {
                   "key": "type",
                   "operator": "=",
-                  "value": "Ride"
+                  "value": "Run"
                 }
               ]
             }
@@ -945,7 +945,7 @@
                 {
                   "key": "type",
                   "operator": "=",
-                  "value": "Ride"
+                  "value": "Run"
                 }
               ]
             }
@@ -1067,7 +1067,7 @@
                 {
                   "key": "type",
                   "operator": "=",
-                  "value": "Ride"
+                  "value": "Run"
                 }
               ]
             }
@@ -1182,7 +1182,7 @@
                 {
                   "key": "type",
                   "operator": "=",
-                  "value": "Ride"
+                  "value": "Run"
                 }
               ]
             }
@@ -1270,6 +1270,6 @@
     ]
   },
   "timezone": "browser",
-  "title": "Bikeride Basics",
-  "version": 5
+  "title": "Runs Basics",
+  "version": 0
 }

@@ -37,6 +37,43 @@ ifdb_source = {
     'user': user
 }
 
+dashboards = glob.glob('./dashboards/*.json')
+api_url_dashboards = grafana_auth_url + "/api/dashboards/db"
+datasource_replace = { '${DS_GRAVA_SOURCE}': datasource_name }
+
+
+############## Functions  ##########################
+
+def create_dashboards(dashboards):
+    for db in dashboards:
+         with open(db) as dash_json_in, open(db + '.read', 'w') as dash_json_read:
+              for line in dash_json_in:
+                  for old_datasource, new_datasource in datasource_replace.iteritems():
+                      line = line.replace(old_datasource, new_datasource)
+                  dash_json_read.write(line)
+
+         with open(db + '.read') as dash_json:
+             dashboard = json.load(dash_json)
+             #https://github.com/grafana/grafana/issues/2816#issuecomment-248795297
+             dashdata = {}
+             dashdata["dashboard"] = dashboard
+             dashdata["overwrite"] = True
+             dashdata["inputs"] = [{}]
+        
+         post_dashboard = session.post(url=api_url_dashboards, data=json.dumps(dashdata), headers=headers)
+         print "...uploading dashboard '" + db , post_dashboard
+
+
+
+
+def delete_temp_dashboards():
+    dashboard_reads = glob.glob('./dashboards/*.read')
+    for reads in dashboard_reads:
+        print "...removing temporary dashboard for uploading ", reads
+        os.remove(reads)
+
+
+
 ############## Do stuff here ##########################
 
 do_login = session.post(url=grafana_login_url, data=json.dumps({'user': user, 'password': password}), headers=headers)
@@ -58,22 +95,11 @@ else:
     print "...skipping create datasource."
 
 
-dashboards = glob.glob('./dashboards/*.json')
 print "...dashboard(s) loaded", dashboards
-api_url_dashboards = grafana_auth_url + "/api/dashboards/db"
-
-for db in dashboards:
-    with open(db) as dash_json:
-        dashboard = json.load(dash_json)
-        #https://github.com/grafana/grafana/issues/2816#issuecomment-248795297
-        dashdata = {}
-        dashdata["dashboard"] = dashboard
-        dashdata["overwrite"] = True
-        dashdata["inputs"] = [{}]
-        
-    post_dashboard = session.post(url=api_url_dashboards, data=json.dumps(dashdata), headers=headers)
-    print "...uploading dashboard '" + db , post_dashboard
-
+print "...creating dashboards"
+create_dashboards(dashboards)
+delete_temp_dashboards()
+ 
     
 
 
