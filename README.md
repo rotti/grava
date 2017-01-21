@@ -93,7 +93,7 @@ For testing place a *limit* to the query and use a test database.
   > Passwort: admin
 
 
-**9. Have fun with *Grava* **
+**9. Have fun with Grava**
 
   Now you are able to explore the dashboards. Please note that, they are made for my purposes and sport types (bike rides, runs, hikes, walks, X-ski). Adapt my dashboards or create your own.
 
