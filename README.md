@@ -16,7 +16,7 @@ The used database [InfluxDB](https://www.influxdata.com/) is a time series datab
 
 </br>
 ## Status
-**Version 0.1**
+**Version 0.2**
 
 Grava is in a developing/testing state. There are several issues and missing features. You are welcome to test it.
 For testing place a *limit* to the query and use a test database.
@@ -77,12 +77,13 @@ For testing place a *limit* to the query and use a test database.
   ```
   python grava_init_frontend.py
   ```
+  grava_init_frontend.py will create a datasource and uploads all dashboards from the directory *./dashboards*. 
+  
+  You can export your custom dashboards to JSON and make the upload later on with *grava_init_frontend.py*. The filename of your dashboard must be in the format *filename.json*. 
+  Find further help to make dashboards here: http://docs.grafana.org/
 
-  Using the Dashboard Templates is optional. You may make your own. Find further help here: http://docs.grafana.org/
 
-
-
-**7. Login to Grafana**
+**8. Login to Grafana**
 
   Open a browser and connect to Grafana. If it runs on your system the URL would be *http://localhost:3000*
 
@@ -91,9 +92,11 @@ For testing place a *limit* to the query and use a test database.
   > User: admin
   > Passwort: admin
 
-  Do the Grafana configuration. Find further help here: https://docs.grafana.org/datasources/influxdb/
 
-  TODO: explain how to configure Grafana datasources
+**9. Have fun with *Grava* **
+
+  Now you are able to explore the dashboards. Please note that, they are made for my purposes and sport types (bike rides, runs, hikes, walks, X-ski). Adapt my dashboards or create your own.
+
 
 
 ## Usage of token_helper.py
