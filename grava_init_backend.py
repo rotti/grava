@@ -229,8 +229,8 @@ def get_and_normalize_gravadata(counter, last_strava_activity):
 
     activity_count = 0
 
-    for activity in strava.get_activities(limit=5):
-    #for activity in strava.get_activities(after=str(last_strava_activity)):
+    #for activity in strava.get_activities(limit=5):
+    for activity in strava.get_activities(after=str(last_strava_activity)):
         counter += 1
         activity_count += 1
  
