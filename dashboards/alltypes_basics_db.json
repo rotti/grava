@@ -590,6 +590,12 @@
                   {
                     "params": [],
                     "type": "max"
+                  },
+                  {
+                    "params": [
+                      "* 3.6"
+                    ],
+                    "type": "math"
                   }
                 ]
               ],
@@ -2518,5 +2524,5 @@
   },
   "timezone": "browser",
   "title": "Activities Basic",
-  "version": 5
+  "version": 2
 }

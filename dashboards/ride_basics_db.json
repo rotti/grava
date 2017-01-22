@@ -181,7 +181,7 @@
           "scroll": true,
           "showHeader": true,
           "sort": {
-            "col": 1,
+            "col": 0,
             "desc": false
           },
           "span": 4,
@@ -446,6 +446,12 @@
                   {
                     "params": [],
                     "type": "max"
+                  },
+                  {
+                    "params": [
+                      "* 3.6"
+                    ],
+                    "type": "math"
                   }
                 ]
               ],
@@ -1270,6 +1276,6 @@
     ]
   },
   "timezone": "browser",
-  "title": "Bikeride Basics",
-  "version": 5
+  "title": "Ride Basics",
+  "version": 0
 }

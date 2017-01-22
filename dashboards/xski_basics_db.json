@@ -102,7 +102,7 @@
               ],
               "measurement": "strava_activity",
               "policy": "default",
-              "query": "SELECT mean(\"distance\") FROM \"measurement\" WHERE \"type\" = 'Ride' AND $timeFilter GROUP BY time($interval) fill(null)",
+              "query": "SELECT mean(\"distance\") FROM \"measurement\" WHERE \"type\" = 'NordicSki' AND $timeFilter GROUP BY time($interval) fill(null)",
               "rawQuery": false,
               "refId": "A",
               "resultFormat": "time_series",
@@ -124,7 +124,7 @@
                 {
                   "key": "type",
                   "operator": "=",
-                  "value": "Run"
+                  "value": "NordicSki"
                 }
               ]
             }
@@ -132,7 +132,7 @@
           "thresholds": [],
           "timeFrom": null,
           "timeShift": null,
-          "title": "Dates and Times of Runs",
+          "title": "Dates and Times of NordicSki",
           "tooltip": {
             "shared": false,
             "sort": 0,
@@ -202,7 +202,7 @@
           ],
           "targets": [
             {
-              "alias": "Number of Runs",
+              "alias": "Number of NordicSki",
               "dsType": "influxdb",
               "groupBy": [],
               "measurement": "strava_activity",
@@ -229,7 +229,7 @@
                 {
                   "key": "type",
                   "operator": "=",
-                  "value": "Run"
+                  "value": "NordicSki"
                 }
               ]
             },
@@ -261,7 +261,7 @@
                 {
                   "key": "type",
                   "operator": "=",
-                  "value": "Run"
+                  "value": "NordicSki"
                 }
               ]
             },
@@ -293,12 +293,12 @@
                 {
                   "key": "type",
                   "operator": "=",
-                  "value": "Run"
+                  "value": "NordicSki"
                 }
               ]
             },
             {
-              "alias": "Average PRs per Run",
+              "alias": "Average PRs per NordicSki",
               "dsType": "influxdb",
               "groupBy": [],
               "measurement": "strava_activity",
@@ -325,7 +325,7 @@
                 {
                   "key": "type",
                   "operator": "=",
-                  "value": "Run"
+                  "value": "NordicSki"
                 }
               ]
             },
@@ -357,12 +357,12 @@
                 {
                   "key": "type",
                   "operator": "=",
-                  "value": "Run"
+                  "value": "NordicSki"
                 }
               ]
             },
             {
-              "alias": "Average Kudos per Run",
+              "alias": "Average Kudos per NordicSki",
               "dsType": "influxdb",
               "groupBy": [],
               "measurement": "strava_activity",
@@ -389,12 +389,12 @@
                 {
                   "key": "type",
                   "operator": "=",
-                  "value": "Run"
+                  "value": "NordicSki"
                 }
               ]
             },
             {
-              "alias": "Average Athletes on Runs",
+              "alias": "Average Athletes on NordicSki",
               "dsType": "influxdb",
               "groupBy": [],
               "measurement": "strava_activity",
@@ -421,7 +421,7 @@
                 {
                   "key": "type",
                   "operator": "=",
-                  "value": "Run"
+                  "value": "NordicSki"
                 }
               ]
             },
@@ -459,7 +459,7 @@
                 {
                   "key": "type",
                   "operator": "=",
-                  "value": "Run"
+                  "value": "NordicSki"
                 }
               ]
             },
@@ -491,7 +491,7 @@
                 {
                   "key": "type",
                   "operator": "=",
-                  "value": "Run"
+                  "value": "NordicSki"
                 }
               ]
             }
@@ -565,7 +565,7 @@
               ],
               "measurement": "strava_activity",
               "policy": "default",
-              "query": "SELECT mean(\"distance\") FROM \"measurement\" WHERE \"type\" = 'Ride' AND $timeFilter GROUP BY time($interval) fill(null)",
+              "query": "SELECT mean(\"distance\") FROM \"measurement\" WHERE \"type\" = 'NordicSki' AND $timeFilter GROUP BY time($interval) fill(null)",
               "rawQuery": false,
               "refId": "A",
               "resultFormat": "time_series",
@@ -587,7 +587,7 @@
                 {
                   "key": "type",
                   "operator": "=",
-                  "value": "Run"
+                  "value": "NordicSki"
                 }
               ]
             }
@@ -682,7 +682,7 @@
               ],
               "measurement": "strava_activity",
               "policy": "default",
-              "query": "SELECT mean(\"distance\") FROM \"measurement\" WHERE \"type\" = 'Ride' AND $timeFilter GROUP BY time($interval) fill(null)",
+              "query": "SELECT mean(\"distance\") FROM \"measurement\" WHERE \"type\" = 'NordicSki' AND $timeFilter GROUP BY time($interval) fill(null)",
               "rawQuery": false,
               "refId": "A",
               "resultFormat": "time_series",
@@ -704,7 +704,7 @@
                 {
                   "key": "type",
                   "operator": "=",
-                  "value": "Run"
+                  "value": "NordicSki"
                 }
               ]
             }
@@ -811,7 +811,7 @@
               ],
               "measurement": "strava_activity",
               "policy": "default",
-              "query": "SELECT mean(\"distance\") FROM \"measurement\" WHERE \"type\" = 'Ride' AND $timeFilter GROUP BY time($interval) fill(null)",
+              "query": "SELECT mean(\"distance\") FROM \"measurement\" WHERE \"type\" = 'NordicSki' AND $timeFilter GROUP BY time($interval) fill(null)",
               "rawQuery": false,
               "refId": "A",
               "resultFormat": "time_series",
@@ -833,7 +833,7 @@
                 {
                   "key": "type",
                   "operator": "=",
-                  "value": "Run"
+                  "value": "NordicSki"
                 }
               ]
             }
@@ -951,7 +951,7 @@
                 {
                   "key": "type",
                   "operator": "=",
-                  "value": "Run"
+                  "value": "NordicSki"
                 }
               ]
             }
@@ -1073,7 +1073,7 @@
                 {
                   "key": "type",
                   "operator": "=",
-                  "value": "Run"
+                  "value": "NordicSki"
                 }
               ]
             }
@@ -1166,7 +1166,7 @@
               ],
               "measurement": "strava_activity",
               "policy": "default",
-              "query": "SELECT mean(\"distance\") FROM \"measurement\" WHERE \"type\" = 'Ride' AND $timeFilter GROUP BY time($interval) fill(null)",
+              "query": "SELECT mean(\"distance\") FROM \"measurement\" WHERE \"type\" = 'NordicSki' AND $timeFilter GROUP BY time($interval) fill(null)",
               "rawQuery": false,
               "refId": "A",
               "resultFormat": "time_series",
@@ -1188,7 +1188,7 @@
                 {
                   "key": "type",
                   "operator": "=",
-                  "value": "Run"
+                  "value": "NordicSki"
                 }
               ]
             }
@@ -1276,6 +1276,6 @@
     ]
   },
   "timezone": "browser",
-  "title": "Run Basics",
-  "version": 2
+  "title": "NordicSki Basics",
+  "version": 1
 }
