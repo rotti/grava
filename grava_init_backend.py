@@ -80,6 +80,22 @@ def convert_to_seconds(time):
 
 
 
+def convert_to_decimal_time(time):
+    if len(time) == 3:
+        time = "0" + time
+
+    hour = int(time[:2])
+    minute = float(time[-2:])
+    minute = int((minute / 60) * 100)
+    
+    if minute < 10:
+       minute = "0" + str(minute)
+
+    return float(str(hour) + str(minute))
+    
+
+
+
 def convert_to_float(string):
     if not ('None' in string): 
         number = str(string)
@@ -213,8 +229,8 @@ def get_and_normalize_gravadata(counter, last_strava_activity):
 
     activity_count = 0
 
-    #for activity in strava.get_activities(limit=5):
-    for activity in strava.get_activities(after=str(last_strava_activity)):
+    for activity in strava.get_activities(limit=5):
+    #for activity in strava.get_activities(after=str(last_strava_activity)):
         counter += 1
         activity_count += 1
  
@@ -296,7 +312,7 @@ def get_and_normalize_gravadata(counter, last_strava_activity):
                     'average_speed': convert_to_float(average_speed[:-5]),
                     'average_heartrate': convert_to_float(average_heartrate),
                     'activity_time': u'{0.start_date}'.format(activity),
-                    'start_time': convert_to_float(start_time),
+                    'start_time': convert_to_decimal_time(start_time),
                     'elev_high': convert_to_float(elev_high),
                     'elev_low': convert_to_float(elev_low),
                     'calories': convert_to_float(calories),
