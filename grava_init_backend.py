@@ -258,8 +258,8 @@ def get_and_normalize_gravadata(counter, last_strava_activity):
         elev_high = str(activity.elev_high)    
         elev_low = str(activity.elev_low)    
 
-        calories = str(activity.calories)
-        kilojoules = str(activity.kilojoules)
+        calories = str(strava.get_activity(activity.id).calories)
+        kilojoules = str(strava.get_activity(activity.id).kilojoules)
     
         kudos_count = str(activity.kudos_count)
         achievement_count = str(activity.achievement_count)
