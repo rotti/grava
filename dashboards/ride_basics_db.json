@@ -102,8 +102,8 @@
               ],
               "measurement": "strava_activity",
               "policy": "default",
-              "query": "SELECT mean(\"distance\") FROM \"measurement\" WHERE \"type\" = 'Ride' AND $timeFilter GROUP BY time($interval) fill(null)",
-              "rawQuery": false,
+              "query": "SELECT mean(\"start_time\") FROM \"strava_activity\" WHERE \"type\" = 'Ride' OR \"type\" = 'VirtualRide' AND $timeFilter GROUP BY time($interval) fill(null)",
+              "rawQuery": true,
               "refId": "A",
               "resultFormat": "time_series",
               "select": [
@@ -125,6 +125,12 @@
                   "key": "type",
                   "operator": "=",
                   "value": "Ride"
+                },
+                {
+                  "condition": "OR",
+                  "key": "type",
+                  "operator": "=",
+                  "value": "VirtualRide"
                 }
               ]
             }
@@ -181,7 +187,7 @@
           "scroll": true,
           "showHeader": true,
           "sort": {
-            "col": 0,
+            "col": 1,
             "desc": false
           },
           "span": 4,
@@ -207,8 +213,8 @@
               "groupBy": [],
               "measurement": "strava_activity",
               "policy": "default",
-              "query": "SELECT sum(\"elapsed_time\") FROM \"strava_activity\" WHERE $timeFilter GROUP BY time($interval) fill(null)",
-              "rawQuery": false,
+              "query": "SELECT count(\"activity_time\") FROM \"strava_activity\" WHERE \"type\" = 'Ride' OR \"type\" = 'VirtualRide' AND $timeFilter",
+              "rawQuery": true,
               "refId": "G",
               "resultFormat": "time_series",
               "select": [
@@ -239,8 +245,8 @@
               "groupBy": [],
               "measurement": "strava_activity",
               "policy": "default",
-              "query": "SELECT sum(\"elapsed_time\") FROM \"strava_activity\" WHERE $timeFilter GROUP BY time($interval) fill(null)",
-              "rawQuery": false,
+              "query": "SELECT sum(\"achievement_count\") FROM \"strava_activity\" WHERE \"type\" = 'Ride'  OR \"type\" = 'VirtualRide' AND $timeFilter",
+              "rawQuery": true,
               "refId": "A",
               "resultFormat": "time_series",
               "select": [
@@ -271,8 +277,8 @@
               "groupBy": [],
               "measurement": "strava_activity",
               "policy": "default",
-              "query": "SELECT sum(\"elapsed_time\") FROM \"strava_activity\" WHERE $timeFilter GROUP BY time($interval) fill(null)",
-              "rawQuery": false,
+              "query": "SELECT sum(\"pr_count\") FROM \"strava_activity\" WHERE \"type\" = 'Ride'  OR \"type\" = 'VirtualRide' AND $timeFilter",
+              "rawQuery": true,
               "refId": "B",
               "resultFormat": "time_series",
               "select": [
@@ -303,8 +309,8 @@
               "groupBy": [],
               "measurement": "strava_activity",
               "policy": "default",
-              "query": "SELECT sum(\"elapsed_time\") FROM \"strava_activity\" WHERE $timeFilter GROUP BY time($interval) fill(null)",
-              "rawQuery": false,
+              "query": "SELECT mean(\"pr_count\") FROM \"strava_activity\" WHERE \"type\" = 'Ride' OR \"type\" = 'VirtualRide' AND $timeFilter",
+              "rawQuery": true,
               "refId": "F",
               "resultFormat": "time_series",
               "select": [
@@ -335,8 +341,8 @@
               "groupBy": [],
               "measurement": "strava_activity",
               "policy": "default",
-              "query": "SELECT sum(\"elapsed_time\") FROM \"strava_activity\" WHERE $timeFilter GROUP BY time($interval) fill(null)",
-              "rawQuery": false,
+              "query": "SELECT sum(\"kudos_count\") FROM \"strava_activity\" WHERE \"type\" = 'Ride' OR \"type\" = 'VirtualRide' AND $timeFilter",
+              "rawQuery": true,
               "refId": "D",
               "resultFormat": "time_series",
               "select": [
@@ -367,8 +373,8 @@
               "groupBy": [],
               "measurement": "strava_activity",
               "policy": "default",
-              "query": "SELECT sum(\"elapsed_time\") FROM \"strava_activity\" WHERE $timeFilter GROUP BY time($interval) fill(null)",
-              "rawQuery": false,
+              "query": "SELECT mean(\"kudos_count\") FROM \"strava_activity\" WHERE \"type\" = 'Ride' OR \"type\" = 'VirtualRide' AND $timeFilter",
+              "rawQuery": true,
               "refId": "E",
               "resultFormat": "time_series",
               "select": [
@@ -399,8 +405,8 @@
               "groupBy": [],
               "measurement": "strava_activity",
               "policy": "default",
-              "query": "SELECT sum(\"elapsed_time\") FROM \"strava_activity\" WHERE $timeFilter GROUP BY time($interval) fill(null)",
-              "rawQuery": false,
+              "query": "SELECT mean(\"athlete_count\") FROM \"strava_activity\" WHERE \"type\" = 'Ride' OR \"type\" = 'VirtualRide' AND $timeFilter",
+              "rawQuery": true,
               "refId": "C",
               "resultFormat": "time_series",
               "select": [
@@ -431,8 +437,8 @@
               "groupBy": [],
               "measurement": "strava_activity",
               "policy": "default",
-              "query": "SELECT sum(\"elapsed_time\") FROM \"strava_activity\" WHERE $timeFilter GROUP BY time($interval) fill(null)",
-              "rawQuery": false,
+              "query": "SELECT max(\"max_speed\") FROM \"strava_activity\" WHERE \"type\" = 'Ride' OR \"type\" = 'VirtualRide' AND $timeFilter",
+              "rawQuery": true,
               "refId": "H",
               "resultFormat": "time_series",
               "select": [
@@ -446,12 +452,6 @@
                   {
                     "params": [],
                     "type": "max"
-                  },
-                  {
-                    "params": [
-                      "* 3.6"
-                    ],
-                    "type": "math"
                   }
                 ]
               ],
@@ -469,8 +469,8 @@
               "groupBy": [],
               "measurement": "strava_activity",
               "policy": "default",
-              "query": "SELECT sum(\"elapsed_time\") FROM \"strava_activity\" WHERE $timeFilter GROUP BY time($interval) fill(null)",
-              "rawQuery": false,
+              "query": "SELECT max(\"max_heartrate\") FROM \"strava_activity\" WHERE \"type\" = 'Ride' OR \"type\" = 'VirtualRide' AND $timeFilter",
+              "rawQuery": true,
               "refId": "I",
               "resultFormat": "time_series",
               "select": [
@@ -682,8 +682,8 @@
               ],
               "measurement": "strava_activity",
               "policy": "default",
-              "query": "SELECT mean(\"distance\") FROM \"measurement\" WHERE \"type\" = 'Ride' AND $timeFilter GROUP BY time($interval) fill(null)",
-              "rawQuery": false,
+              "query": "SELECT mean(\"elapsed_time\") FROM \"strava_activity\" WHERE \"type\" = 'Ride'  OR \"type\" = 'VirtualRide' AND $timeFilter GROUP BY time($interval) fill(null)",
+              "rawQuery": true,
               "refId": "A",
               "resultFormat": "time_series",
               "select": [
@@ -811,8 +811,8 @@
               ],
               "measurement": "strava_activity",
               "policy": "default",
-              "query": "SELECT mean(\"distance\") FROM \"measurement\" WHERE \"type\" = 'Ride' AND $timeFilter GROUP BY time($interval) fill(null)",
-              "rawQuery": false,
+              "query": "SELECT mean(\"total_elevation_gain\") FROM \"strava_activity\" WHERE \"type\" = 'Ride'  OR \"type\" = 'VirtualRide' AND $timeFilter GROUP BY time($interval) fill(null)",
+              "rawQuery": true,
               "refId": "A",
               "resultFormat": "time_series",
               "select": [
@@ -925,6 +925,8 @@
               ],
               "measurement": "strava_activity",
               "policy": "default",
+              "query": "SELECT mean(\"average_speed\") *3.6 FROM \"strava_activity\" WHERE \"type\" = 'Ride'  OR \"type\" = 'VirtualRide' AND $timeFilter GROUP BY time($interval) fill(null)",
+              "rawQuery": true,
               "refId": "A",
               "resultFormat": "time_series",
               "select": [
@@ -1053,6 +1055,8 @@
               ],
               "measurement": "strava_activity",
               "policy": "default",
+              "query": "SELECT mean(\"average_heartrate\") FROM \"strava_activity\" WHERE \"type\" = 'Ride' AND $timeFilter GROUP BY time($interval) fill(null)",
+              "rawQuery": true,
               "refId": "A",
               "resultFormat": "time_series",
               "select": [
@@ -1166,8 +1170,8 @@
               ],
               "measurement": "strava_activity",
               "policy": "default",
-              "query": "SELECT mean(\"distance\") FROM \"measurement\" WHERE \"type\" = 'Ride' AND $timeFilter GROUP BY time($interval) fill(null)",
-              "rawQuery": false,
+              "query": "SELECT mean(\"calories\") FROM \"strava_activity\" WHERE \"type\" = 'Ride' OR \"type\" = 'VirtualRide' AND $timeFilter GROUP BY time($interval) fill(null)",
+              "rawQuery": true,
               "refId": "A",
               "resultFormat": "time_series",
               "select": [
@@ -1247,8 +1251,8 @@
     "list": []
   },
   "time": {
-    "from": "now-2y",
-    "to": "now"
+    "from": "2017-06-12T03:35:27.889Z",
+    "to": "2017-08-23T07:29:54.569Z"
   },
   "timepicker": {
     "refresh_intervals": [
@@ -1276,6 +1280,6 @@
     ]
   },
   "timezone": "browser",
-  "title": "Ride Basics",
-  "version": 0
+  "title": "Bikeride Basics",
+  "version": 3
 }
