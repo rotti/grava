@@ -48,12 +48,14 @@
   "rows": [
     {
       "collapse": false,
-      "height": 273,
+      "height": 307,
       "panels": [
         {
           "aliasColors": {
+            "Mountainbike": "#0A437C",
             "Ridedate": "#DEDAF7",
             "Starting Time": "#DEDAF7",
+            "Virtual": "#890F02",
             "strava_activity.mean": "#DEDAF7"
           },
           "bars": false,
@@ -66,7 +68,7 @@
             "current": false,
             "max": false,
             "min": false,
-            "show": false,
+            "show": true,
             "total": false,
             "values": false
           },
@@ -84,7 +86,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "alias": "Starting Time",
+              "alias": "Virtual",
               "dsType": "influxdb",
               "groupBy": [
                 {
@@ -100,11 +102,64 @@
                   "type": "fill"
                 }
               ],
+              "hide": false,
               "measurement": "strava_activity",
               "policy": "default",
               "query": "SELECT mean(\"start_time\") FROM \"strava_activity\" WHERE \"type\" = 'Ride' OR \"type\" = 'VirtualRide' AND $timeFilter GROUP BY time($interval) fill(null)",
-              "rawQuery": true,
+              "rawQuery": false,
               "refId": "A",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "start_time"
+                    ],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "mean"
+                  }
+                ]
+              ],
+              "tags": [
+                {
+                  "key": "type",
+                  "operator": "=",
+                  "value": "VirtualRide"
+                },
+                {
+                  "condition": "AND",
+                  "key": "gear_name",
+                  "operator": "=",
+                  "value": "Merida auf Tacx"
+                }
+              ]
+            },
+            {
+              "alias": "Roadbike",
+              "dsType": "influxdb",
+              "groupBy": [
+                {
+                  "params": [
+                    "$interval"
+                  ],
+                  "type": "time"
+                },
+                {
+                  "params": [
+                    "null"
+                  ],
+                  "type": "fill"
+                }
+              ],
+              "hide": false,
+              "measurement": "strava_activity",
+              "policy": "default",
+              "query": "SELECT mean(\"start_time\") FROM \"strava_activity\" WHERE \"type\" = 'Ride' OR \"type\" = 'VirtualRide' AND \"gear_name\" = 'Scultura 5000' AND $timeFilter GROUP BY time($interval) fill(null)",
+              "rawQuery": false,
+              "refId": "B",
               "resultFormat": "time_series",
               "select": [
                 [
@@ -127,10 +182,62 @@
                   "value": "Ride"
                 },
                 {
-                  "condition": "OR",
+                  "condition": "AND",
+                  "key": "gear_name",
+                  "operator": "=",
+                  "value": "Scultura 5000"
+                }
+              ]
+            },
+            {
+              "alias": "Mountainbike",
+              "dsType": "influxdb",
+              "groupBy": [
+                {
+                  "params": [
+                    "$interval"
+                  ],
+                  "type": "time"
+                },
+                {
+                  "params": [
+                    "null"
+                  ],
+                  "type": "fill"
+                }
+              ],
+              "hide": false,
+              "measurement": "strava_activity",
+              "policy": "default",
+              "query": "SELECT mean(\"start_time\") FROM \"strava_activity\" WHERE \"type\" = 'Ride' OR \"type\" = 'VirtualRide' AND $timeFilter GROUP BY time($interval) fill(null)",
+              "rawQuery": false,
+              "refId": "C",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "start_time"
+                    ],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "mean"
+                  }
+                ]
+              ],
+              "tags": [
+                {
                   "key": "type",
                   "operator": "=",
-                  "value": "VirtualRide"
+                  "value": "Ride"
+                },
+                {
+                  "condition": "AND",
+                  "key": "gear_name",
+                  "operator": "=",
+                  "value": "Rose Root Miller 3 2015"
                 }
               ]
             }
@@ -516,6 +623,9 @@
         {
           "aliasColors": {
             "Distance": "#E5AC0E",
+            "Distance Mountainbike": "#0A437C",
+            "Distance Roadbike": "#EAB839",
+            "Distance Virtual": "#890F02",
             "Ridedate": "#DEDAF7",
             "strava_activity.mean": "#DEDAF7"
           },
@@ -547,7 +657,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "alias": "Distance",
+              "alias": "Distance Virtual",
               "dsType": "influxdb",
               "groupBy": [
                 {
@@ -587,7 +697,115 @@
                 {
                   "key": "type",
                   "operator": "=",
+                  "value": "VirtualRide"
+                },
+                {
+                  "condition": "AND",
+                  "key": "gear_name",
+                  "operator": "=",
+                  "value": "Merida auf Tacx"
+                }
+              ]
+            },
+            {
+              "alias": "Distance Roadbike",
+              "dsType": "influxdb",
+              "groupBy": [
+                {
+                  "params": [
+                    "$interval"
+                  ],
+                  "type": "time"
+                },
+                {
+                  "params": [
+                    "null"
+                  ],
+                  "type": "fill"
+                }
+              ],
+              "measurement": "strava_activity",
+              "policy": "default",
+              "query": "SELECT mean(\"distance\") FROM \"measurement\" WHERE \"type\" = 'Ride' AND $timeFilter GROUP BY time($interval) fill(null)",
+              "rawQuery": false,
+              "refId": "C",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "distance"
+                    ],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "mean"
+                  }
+                ]
+              ],
+              "tags": [
+                {
+                  "key": "type",
+                  "operator": "=",
                   "value": "Ride"
+                },
+                {
+                  "condition": "AND",
+                  "key": "gear_name",
+                  "operator": "=",
+                  "value": "Scultura 5000"
+                }
+              ]
+            },
+            {
+              "alias": "Distance Mountainbike",
+              "dsType": "influxdb",
+              "groupBy": [
+                {
+                  "params": [
+                    "$interval"
+                  ],
+                  "type": "time"
+                },
+                {
+                  "params": [
+                    "null"
+                  ],
+                  "type": "fill"
+                }
+              ],
+              "measurement": "strava_activity",
+              "policy": "default",
+              "query": "SELECT mean(\"distance\") FROM \"measurement\" WHERE \"type\" = 'Ride' AND $timeFilter GROUP BY time($interval) fill(null)",
+              "rawQuery": false,
+              "refId": "B",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "distance"
+                    ],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "mean"
+                  }
+                ]
+              ],
+              "tags": [
+                {
+                  "key": "type",
+                  "operator": "=",
+                  "value": "Ride"
+                },
+                {
+                  "condition": "AND",
+                  "key": "gear_name",
+                  "operator": "=",
+                  "value": "Rose Root Miller 3 2015"
                 }
               ]
             }
@@ -633,6 +851,9 @@
         {
           "aliasColors": {
             "Duration": "#70DBED",
+            "Duration Mountainbike": "#0A437C",
+            "Duration Roadbike": "#EAB839",
+            "Duration Virtual": "#890F02",
             "Ridedate": "#DEDAF7",
             "strava_activity.mean": "#DEDAF7"
           },
@@ -664,7 +885,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "alias": "Duration",
+              "alias": "Duration Virtual",
               "dsType": "influxdb",
               "groupBy": [
                 {
@@ -683,7 +904,7 @@
               "measurement": "strava_activity",
               "policy": "default",
               "query": "SELECT mean(\"elapsed_time\") FROM \"strava_activity\" WHERE \"type\" = 'Ride'  OR \"type\" = 'VirtualRide' AND $timeFilter GROUP BY time($interval) fill(null)",
-              "rawQuery": true,
+              "rawQuery": false,
               "refId": "A",
               "resultFormat": "time_series",
               "select": [
@@ -704,7 +925,115 @@
                 {
                   "key": "type",
                   "operator": "=",
+                  "value": "VirtualRide"
+                },
+                {
+                  "condition": "AND",
+                  "key": "gear_name",
+                  "operator": "=",
+                  "value": "Merida auf Tacx"
+                }
+              ]
+            },
+            {
+              "alias": "Duration Roadbike",
+              "dsType": "influxdb",
+              "groupBy": [
+                {
+                  "params": [
+                    "$interval"
+                  ],
+                  "type": "time"
+                },
+                {
+                  "params": [
+                    "null"
+                  ],
+                  "type": "fill"
+                }
+              ],
+              "measurement": "strava_activity",
+              "policy": "default",
+              "query": "SELECT mean(\"elapsed_time\") FROM \"strava_activity\" WHERE \"type\" = 'Ride'  OR \"type\" = 'VirtualRide' AND $timeFilter GROUP BY time($interval) fill(null)",
+              "rawQuery": false,
+              "refId": "B",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "elapsed_time"
+                    ],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "mean"
+                  }
+                ]
+              ],
+              "tags": [
+                {
+                  "key": "type",
+                  "operator": "=",
                   "value": "Ride"
+                },
+                {
+                  "condition": "AND",
+                  "key": "gear_name",
+                  "operator": "=",
+                  "value": "Scultura 5000"
+                }
+              ]
+            },
+            {
+              "alias": "Duration Mountainbike",
+              "dsType": "influxdb",
+              "groupBy": [
+                {
+                  "params": [
+                    "$interval"
+                  ],
+                  "type": "time"
+                },
+                {
+                  "params": [
+                    "null"
+                  ],
+                  "type": "fill"
+                }
+              ],
+              "measurement": "strava_activity",
+              "policy": "default",
+              "query": "SELECT mean(\"elapsed_time\") FROM \"strava_activity\" WHERE \"type\" = 'Ride'  OR \"type\" = 'VirtualRide' AND $timeFilter GROUP BY time($interval) fill(null)",
+              "rawQuery": false,
+              "refId": "C",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "elapsed_time"
+                    ],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "mean"
+                  }
+                ]
+              ],
+              "tags": [
+                {
+                  "key": "type",
+                  "operator": "=",
+                  "value": "Ride"
+                },
+                {
+                  "condition": "AND",
+                  "key": "gear_name",
+                  "operator": "=",
+                  "value": "Rose Root Miller 3 2015"
                 }
               ]
             }
@@ -762,6 +1091,8 @@
         {
           "aliasColors": {
             "Elevation": "#E0752D",
+            "Elevation Mountainbike": "#0A437C",
+            "Elevation Virtual": "#890F02",
             "Ridedate": "#DEDAF7",
             "strava_activity.mean": "#DEDAF7"
           },
@@ -793,7 +1124,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "alias": "Elevation",
+              "alias": "Elevation Virtual",
               "dsType": "influxdb",
               "groupBy": [
                 {
@@ -812,7 +1143,7 @@
               "measurement": "strava_activity",
               "policy": "default",
               "query": "SELECT mean(\"total_elevation_gain\") FROM \"strava_activity\" WHERE \"type\" = 'Ride'  OR \"type\" = 'VirtualRide' AND $timeFilter GROUP BY time($interval) fill(null)",
-              "rawQuery": true,
+              "rawQuery": false,
               "refId": "A",
               "resultFormat": "time_series",
               "select": [
@@ -833,7 +1164,115 @@
                 {
                   "key": "type",
                   "operator": "=",
+                  "value": "VirtualRide"
+                },
+                {
+                  "condition": "AND",
+                  "key": "gear_name",
+                  "operator": "=",
+                  "value": "Merida auf Tacx"
+                }
+              ]
+            },
+            {
+              "alias": "Elevation Roadbike",
+              "dsType": "influxdb",
+              "groupBy": [
+                {
+                  "params": [
+                    "$interval"
+                  ],
+                  "type": "time"
+                },
+                {
+                  "params": [
+                    "null"
+                  ],
+                  "type": "fill"
+                }
+              ],
+              "measurement": "strava_activity",
+              "policy": "default",
+              "query": "SELECT mean(\"total_elevation_gain\") FROM \"strava_activity\" WHERE \"type\" = 'Ride'  OR \"type\" = 'VirtualRide' AND $timeFilter GROUP BY time($interval) fill(null)",
+              "rawQuery": false,
+              "refId": "B",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "total_elevation_gain"
+                    ],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "mean"
+                  }
+                ]
+              ],
+              "tags": [
+                {
+                  "key": "type",
+                  "operator": "=",
                   "value": "Ride"
+                },
+                {
+                  "condition": "AND",
+                  "key": "gear_name",
+                  "operator": "=",
+                  "value": "Scultura 5000"
+                }
+              ]
+            },
+            {
+              "alias": "Elevation Mountainbike",
+              "dsType": "influxdb",
+              "groupBy": [
+                {
+                  "params": [
+                    "$interval"
+                  ],
+                  "type": "time"
+                },
+                {
+                  "params": [
+                    "null"
+                  ],
+                  "type": "fill"
+                }
+              ],
+              "measurement": "strava_activity",
+              "policy": "default",
+              "query": "SELECT mean(\"total_elevation_gain\") FROM \"strava_activity\" WHERE \"type\" = 'Ride'  OR \"type\" = 'VirtualRide' AND $timeFilter GROUP BY time($interval) fill(null)",
+              "rawQuery": false,
+              "refId": "C",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "total_elevation_gain"
+                    ],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "mean"
+                  }
+                ]
+              ],
+              "tags": [
+                {
+                  "key": "type",
+                  "operator": "=",
+                  "value": "Ride"
+                },
+                {
+                  "condition": "AND",
+                  "key": "gear_name",
+                  "operator": "=",
+                  "value": "Rose Root Miller 3 2015"
                 }
               ]
             }
@@ -878,7 +1317,9 @@
         },
         {
           "aliasColors": {
-            "Average Speed": "#0A50A1"
+            "Average Speed": "#0A50A1",
+            "Average Speed Mountainbike": "#0A437C",
+            "Average Speed Virtual": "#890F02"
           },
           "bars": true,
           "datasource": "${DS_GRAVA_SOURCE}",
@@ -907,7 +1348,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "alias": "Average Speed",
+              "alias": "Average Speed Virtual",
               "dsType": "influxdb",
               "groupBy": [
                 {
@@ -926,7 +1367,7 @@
               "measurement": "strava_activity",
               "policy": "default",
               "query": "SELECT mean(\"average_speed\") *3.6 FROM \"strava_activity\" WHERE \"type\" = 'Ride'  OR \"type\" = 'VirtualRide' AND $timeFilter GROUP BY time($interval) fill(null)",
-              "rawQuery": true,
+              "rawQuery": false,
               "refId": "A",
               "resultFormat": "time_series",
               "select": [
@@ -953,7 +1394,127 @@
                 {
                   "key": "type",
                   "operator": "=",
+                  "value": "VirtualRide"
+                },
+                {
+                  "condition": "AND",
+                  "key": "gear_name",
+                  "operator": "=",
+                  "value": "Merida auf Tacx"
+                }
+              ]
+            },
+            {
+              "alias": "Average Speed Roadbike",
+              "dsType": "influxdb",
+              "groupBy": [
+                {
+                  "params": [
+                    "$interval"
+                  ],
+                  "type": "time"
+                },
+                {
+                  "params": [
+                    "null"
+                  ],
+                  "type": "fill"
+                }
+              ],
+              "measurement": "strava_activity",
+              "policy": "default",
+              "query": "SELECT mean(\"average_speed\") *3.6 FROM \"strava_activity\" WHERE \"type\" = 'Ride'  OR \"type\" = 'VirtualRide' AND $timeFilter GROUP BY time($interval) fill(null)",
+              "rawQuery": false,
+              "refId": "B",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "average_speed"
+                    ],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "mean"
+                  },
+                  {
+                    "params": [
+                      "*3.6"
+                    ],
+                    "type": "math"
+                  }
+                ]
+              ],
+              "tags": [
+                {
+                  "key": "type",
+                  "operator": "=",
                   "value": "Ride"
+                },
+                {
+                  "condition": "AND",
+                  "key": "gear_name",
+                  "operator": "=",
+                  "value": "Scultura 5000"
+                }
+              ]
+            },
+            {
+              "alias": "Average Speed Mountainbike",
+              "dsType": "influxdb",
+              "groupBy": [
+                {
+                  "params": [
+                    "$interval"
+                  ],
+                  "type": "time"
+                },
+                {
+                  "params": [
+                    "null"
+                  ],
+                  "type": "fill"
+                }
+              ],
+              "measurement": "strava_activity",
+              "policy": "default",
+              "query": "SELECT mean(\"average_speed\") *3.6 FROM \"strava_activity\" WHERE \"type\" = 'Ride'  OR \"type\" = 'VirtualRide' AND $timeFilter GROUP BY time($interval) fill(null)",
+              "rawQuery": false,
+              "refId": "C",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "average_speed"
+                    ],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "mean"
+                  },
+                  {
+                    "params": [
+                      "*3.6"
+                    ],
+                    "type": "math"
+                  }
+                ]
+              ],
+              "tags": [
+                {
+                  "key": "type",
+                  "operator": "=",
+                  "value": "Ride"
+                },
+                {
+                  "condition": "AND",
+                  "key": "gear_name",
+                  "operator": "=",
+                  "value": "Rose Root Miller 3 2015"
                 }
               ]
             }
@@ -1008,7 +1569,9 @@
       "panels": [
         {
           "aliasColors": {
-            "Heartbeats per Minute": "#BF1B00"
+            "Heartbeats per Minute": "#BF1B00",
+            "Heartbeats per Minute Mountainbike": "#0A437C",
+            "Heartbeats per Minute Virtual": "#890F02"
           },
           "bars": true,
           "datasource": "${DS_GRAVA_SOURCE}",
@@ -1019,7 +1582,7 @@
             "current": false,
             "max": false,
             "min": false,
-            "show": false,
+            "show": true,
             "total": false,
             "values": false
           },
@@ -1037,7 +1600,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "alias": "Heartbeats per Minute",
+              "alias": "Heartbeats per Minute Virtual",
               "dsType": "influxdb",
               "groupBy": [
                 {
@@ -1056,7 +1619,7 @@
               "measurement": "strava_activity",
               "policy": "default",
               "query": "SELECT mean(\"average_heartrate\") FROM \"strava_activity\" WHERE \"type\" = 'Ride' AND $timeFilter GROUP BY time($interval) fill(null)",
-              "rawQuery": true,
+              "rawQuery": false,
               "refId": "A",
               "resultFormat": "time_series",
               "select": [
@@ -1077,7 +1640,115 @@
                 {
                   "key": "type",
                   "operator": "=",
+                  "value": "VirtualRide"
+                },
+                {
+                  "condition": "AND",
+                  "key": "gear_name",
+                  "operator": "=",
+                  "value": "Merida auf Tacx"
+                }
+              ]
+            },
+            {
+              "alias": "Heartbeats per Minute Roadbike",
+              "dsType": "influxdb",
+              "groupBy": [
+                {
+                  "params": [
+                    "$interval"
+                  ],
+                  "type": "time"
+                },
+                {
+                  "params": [
+                    "null"
+                  ],
+                  "type": "fill"
+                }
+              ],
+              "measurement": "strava_activity",
+              "policy": "default",
+              "query": "SELECT mean(\"average_heartrate\") FROM \"strava_activity\" WHERE \"type\" = 'Ride' AND $timeFilter GROUP BY time($interval) fill(null)",
+              "rawQuery": false,
+              "refId": "B",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "average_heartrate"
+                    ],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "mean"
+                  }
+                ]
+              ],
+              "tags": [
+                {
+                  "key": "type",
+                  "operator": "=",
                   "value": "Ride"
+                },
+                {
+                  "condition": "AND",
+                  "key": "gear_name",
+                  "operator": "=",
+                  "value": "Scultura 5000"
+                }
+              ]
+            },
+            {
+              "alias": "Heartbeats per Minute Mountainbike",
+              "dsType": "influxdb",
+              "groupBy": [
+                {
+                  "params": [
+                    "$interval"
+                  ],
+                  "type": "time"
+                },
+                {
+                  "params": [
+                    "null"
+                  ],
+                  "type": "fill"
+                }
+              ],
+              "measurement": "strava_activity",
+              "policy": "default",
+              "query": "SELECT mean(\"average_heartrate\") FROM \"strava_activity\" WHERE \"type\" = 'Ride' AND $timeFilter GROUP BY time($interval) fill(null)",
+              "rawQuery": false,
+              "refId": "C",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "average_heartrate"
+                    ],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "mean"
+                  }
+                ]
+              ],
+              "tags": [
+                {
+                  "key": "type",
+                  "operator": "=",
+                  "value": "Ride"
+                },
+                {
+                  "condition": "AND",
+                  "key": "gear_name",
+                  "operator": "=",
+                  "value": "Rose Root Miller 3 2015"
                 }
               ]
             }
@@ -1120,6 +1791,9 @@
         },
         {
           "aliasColors": {
+            "Calories Mountainbike": "#0A437C",
+            "Calories Roadbike": "#CCA300",
+            "Calories Virtual": "#890F02",
             "Elevation": "#967302",
             "Ridedate": "#DEDAF7",
             "strava_activity.mean": "#DEDAF7"
@@ -1152,7 +1826,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "alias": "Calories",
+              "alias": "Calories Virtual",
               "dsType": "influxdb",
               "groupBy": [
                 {
@@ -1171,7 +1845,7 @@
               "measurement": "strava_activity",
               "policy": "default",
               "query": "SELECT mean(\"calories\") FROM \"strava_activity\" WHERE \"type\" = 'Ride' OR \"type\" = 'VirtualRide' AND $timeFilter GROUP BY time($interval) fill(null)",
-              "rawQuery": true,
+              "rawQuery": false,
               "refId": "A",
               "resultFormat": "time_series",
               "select": [
@@ -1192,7 +1866,117 @@
                 {
                   "key": "type",
                   "operator": "=",
+                  "value": "VirtualRide"
+                },
+                {
+                  "condition": "AND",
+                  "key": "gear_name",
+                  "operator": "=",
+                  "value": "Merida auf Tacx"
+                }
+              ]
+            },
+            {
+              "alias": "Calories Roadbike",
+              "dsType": "influxdb",
+              "groupBy": [
+                {
+                  "params": [
+                    "$interval"
+                  ],
+                  "type": "time"
+                },
+                {
+                  "params": [
+                    "null"
+                  ],
+                  "type": "fill"
+                }
+              ],
+              "hide": false,
+              "measurement": "strava_activity",
+              "policy": "default",
+              "query": "SELECT mean(\"calories\") FROM \"strava_activity\" WHERE \"type\" = 'Ride' OR \"type\" = 'VirtualRide' AND $timeFilter GROUP BY time($interval) fill(null)",
+              "rawQuery": false,
+              "refId": "B",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "calories"
+                    ],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "mean"
+                  }
+                ]
+              ],
+              "tags": [
+                {
+                  "key": "type",
+                  "operator": "=",
                   "value": "Ride"
+                },
+                {
+                  "condition": "AND",
+                  "key": "gear_name",
+                  "operator": "=",
+                  "value": "Scultura 5000"
+                }
+              ]
+            },
+            {
+              "alias": "Calories Mountainbike",
+              "dsType": "influxdb",
+              "groupBy": [
+                {
+                  "params": [
+                    "$interval"
+                  ],
+                  "type": "time"
+                },
+                {
+                  "params": [
+                    "null"
+                  ],
+                  "type": "fill"
+                }
+              ],
+              "hide": false,
+              "measurement": "strava_activity",
+              "policy": "default",
+              "query": "SELECT mean(\"calories\") FROM \"strava_activity\" WHERE \"type\" = 'Ride' OR \"type\" = 'VirtualRide' AND $timeFilter GROUP BY time($interval) fill(null)",
+              "rawQuery": false,
+              "refId": "C",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "calories"
+                    ],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "mean"
+                  }
+                ]
+              ],
+              "tags": [
+                {
+                  "key": "type",
+                  "operator": "=",
+                  "value": "Ride"
+                },
+                {
+                  "condition": "AND",
+                  "key": "gear_name",
+                  "operator": "=",
+                  "value": "Rose Root Miller 3 2015"
                 }
               ]
             }
@@ -1251,8 +2035,8 @@
     "list": []
   },
   "time": {
-    "from": "2017-06-12T03:35:27.889Z",
-    "to": "2017-08-23T07:29:54.569Z"
+    "from": "2017-04-24T08:47:00.525Z",
+    "to": "2017-04-24T18:43:36.478Z"
   },
   "timepicker": {
     "refresh_intervals": [
@@ -1281,5 +2065,5 @@
   },
   "timezone": "browser",
   "title": "Bikeride Basics",
-  "version": 3
+  "version": 5
 }
