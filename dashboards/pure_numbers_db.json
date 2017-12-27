@@ -1613,7 +1613,7 @@
     },
     {
       "collapse": false,
-      "height": 135,
+      "height": 33,
       "panels": [
         {
           "cacheTimeout": null,
@@ -2127,7 +2127,7 @@
           "title": "X-Ski: Avg Duration",
           "transparent": true,
           "type": "singlestat",
-          "valueFontSize": "80%",
+          "valueFontSize": "50%",
           "valueMaps": [
             {
               "op": "=",
@@ -2348,7 +2348,7 @@
           "title": "Total Average Duration",
           "transparent": true,
           "type": "singlestat",
-          "valueFontSize": "80%",
+          "valueFontSize": "50%",
           "valueMaps": [
             {
               "op": "=",
@@ -2368,7 +2368,7 @@
     },
     {
       "collapse": false,
-      "height": 147,
+      "height": 3,
       "panels": [
         {
           "cacheTimeout": null,
@@ -3007,7 +3007,7 @@
           "title": "Walk: Average Speed",
           "transparent": true,
           "type": "singlestat",
-          "valueFontSize": "80%",
+          "valueFontSize": "50%",
           "valueMaps": [
             {
               "op": "=",
@@ -3115,7 +3115,7 @@
           "title": "Total Average Speed",
           "transparent": true,
           "type": "singlestat",
-          "valueFontSize": "80%",
+          "valueFontSize": "50%",
           "valueMaps": [
             {
               "op": "=",
@@ -3135,7 +3135,7 @@
     },
     {
       "collapse": false,
-      "height": 145,
+      "height": -12,
       "panels": [
         {
           "cacheTimeout": null,
@@ -3148,7 +3148,7 @@
           ],
           "datasource": "${DS_GRAVA_SOURCE}",
           "decimals": null,
-          "format": "lengthkm",
+          "format": "none",
           "gauge": {
             "maxValue": 100,
             "minValue": 0,
@@ -3173,7 +3173,7 @@
           "maxDataPoints": 100,
           "nullPointMode": "connected",
           "nullText": null,
-          "postfix": "",
+          "postfix": " km",
           "postfixFontSize": "50%",
           "prefix": "",
           "prefixFontSize": "50%",
@@ -3223,6 +3223,12 @@
                   {
                     "params": [],
                     "type": "sum"
+                  },
+                  {
+                    "params": [
+                      " / 1000"
+                    ],
+                    "type": "math"
                   }
                 ]
               ],
@@ -3684,7 +3690,7 @@
           "title": "X-Ski: Distance",
           "transparent": true,
           "type": "singlestat",
-          "valueFontSize": "80%",
+          "valueFontSize": "50%",
           "valueMaps": [
             {
               "op": "=",
@@ -3797,7 +3803,7 @@
           "title": "Walk: Distance",
           "transparent": true,
           "type": "singlestat",
-          "valueFontSize": "80%",
+          "valueFontSize": "50%",
           "valueMaps": [
             {
               "op": "=",
@@ -3817,7 +3823,7 @@
             "rgba(209, 34, 34, 0.9)"
           ],
           "datasource": "${DS_GRAVA_SOURCE}",
-          "format": "lengthkm",
+          "format": "none",
           "gauge": {
             "maxValue": 100,
             "minValue": 0,
@@ -3842,7 +3848,7 @@
           "maxDataPoints": 100,
           "nullPointMode": "connected",
           "nullText": null,
-          "postfix": "",
+          "postfix": " km",
           "postfixFontSize": "50%",
           "prefix": "",
           "prefixFontSize": "50%",
@@ -3880,20 +3886,26 @@
               "measurement": "strava_activity",
               "policy": "default",
               "query": "SELECT sum(\"distance\") FROM \"strava_activity\" WHERE $timeFilter GROUP BY time($interval) fill(null)",
-              "rawQuery": true,
+              "rawQuery": false,
               "refId": "A",
               "resultFormat": "time_series",
               "select": [
                 [
                   {
                     "params": [
-                      "counter"
+                      "distance"
                     ],
                     "type": "field"
                   },
                   {
                     "params": [],
-                    "type": "count"
+                    "type": "sum"
+                  },
+                  {
+                    "params": [
+                      " / 1000"
+                    ],
+                    "type": "math"
                   }
                 ]
               ],
@@ -3924,7 +3936,7 @@
     },
     {
       "collapse": false,
-      "height": 167,
+      "height": 100,
       "panels": [
         {
           "cacheTimeout": null,
@@ -4435,10 +4447,10 @@
             }
           ],
           "thresholds": "",
-          "title": "X-Ski: Average Distance",
+          "title": "X-Ski: Avg Distance",
           "transparent": true,
           "type": "singlestat",
-          "valueFontSize": "80%",
+          "valueFontSize": "50%",
           "valueMaps": [
             {
               "op": "=",
@@ -4678,7 +4690,7 @@
     },
     {
       "collapse": false,
-      "height": 26,
+      "height": 34,
       "panels": [
         {
           "cacheTimeout": null,
@@ -4690,7 +4702,8 @@
             "rgba(180, 27, 27, 0.9)"
           ],
           "datasource": "${DS_GRAVA_SOURCE}",
-          "format": "lengthm",
+          "decimals": null,
+          "format": "none",
           "gauge": {
             "maxValue": 100,
             "minValue": 0,
@@ -4698,7 +4711,685 @@
             "thresholdLabels": false,
             "thresholdMarkers": true
           },
-          "id": 16,
+          "id": 63,
+          "interval": null,
+          "links": [],
+          "mappingType": 1,
+          "mappingTypes": [
+            {
+              "name": "value to text",
+              "value": 1
+            },
+            {
+              "name": "range to text",
+              "value": 2
+            }
+          ],
+          "maxDataPoints": 100,
+          "nullPointMode": "connected",
+          "nullText": null,
+          "postfix": "",
+          "postfixFontSize": "50%",
+          "prefix": "",
+          "prefixFontSize": "50%",
+          "rangeMaps": [
+            {
+              "from": "null",
+              "text": "N/A",
+              "to": "null"
+            }
+          ],
+          "span": 2,
+          "sparkline": {
+            "fillColor": "rgba(31, 118, 189, 0.18)",
+            "full": false,
+            "lineColor": "rgb(31, 120, 193)",
+            "show": false
+          },
+          "targets": [
+            {
+              "dsType": "influxdb",
+              "groupBy": [
+                {
+                  "params": [
+                    "$interval"
+                  ],
+                  "type": "time"
+                },
+                {
+                  "params": [
+                    "null"
+                  ],
+                  "type": "fill"
+                }
+              ],
+              "measurement": "strava_activity",
+              "policy": "default",
+              "refId": "A",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "calories"
+                    ],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "sum"
+                  }
+                ]
+              ],
+              "tags": [
+                {
+                  "key": "type",
+                  "operator": "=",
+                  "value": "Ride"
+                }
+              ]
+            }
+          ],
+          "thresholds": "",
+          "title": "Bike: Calories",
+          "transparent": true,
+          "type": "singlestat",
+          "valueFontSize": "80%",
+          "valueMaps": [
+            {
+              "op": "=",
+              "text": "N/A",
+              "value": "null"
+            }
+          ],
+          "valueName": "total"
+        },
+        {
+          "cacheTimeout": null,
+          "colorBackground": true,
+          "colorValue": false,
+          "colors": [
+            "rgba(93, 217, 88, 0.97)",
+            "rgba(0, 17, 255, 0.5)",
+            "rgba(180, 27, 27, 0.9)"
+          ],
+          "datasource": "${DS_GRAVA_SOURCE}",
+          "decimals": null,
+          "format": "none",
+          "gauge": {
+            "maxValue": 100,
+            "minValue": 0,
+            "show": false,
+            "thresholdLabels": false,
+            "thresholdMarkers": true
+          },
+          "id": 64,
+          "interval": null,
+          "links": [],
+          "mappingType": 1,
+          "mappingTypes": [
+            {
+              "name": "value to text",
+              "value": 1
+            },
+            {
+              "name": "range to text",
+              "value": 2
+            }
+          ],
+          "maxDataPoints": 100,
+          "nullPointMode": "connected",
+          "nullText": null,
+          "postfix": "",
+          "postfixFontSize": "50%",
+          "prefix": "",
+          "prefixFontSize": "50%",
+          "rangeMaps": [
+            {
+              "from": "null",
+              "text": "N/A",
+              "to": "null"
+            }
+          ],
+          "span": 2,
+          "sparkline": {
+            "fillColor": "rgba(31, 118, 189, 0.18)",
+            "full": false,
+            "lineColor": "rgb(31, 120, 193)",
+            "show": false
+          },
+          "targets": [
+            {
+              "dsType": "influxdb",
+              "groupBy": [
+                {
+                  "params": [
+                    "$interval"
+                  ],
+                  "type": "time"
+                },
+                {
+                  "params": [
+                    "null"
+                  ],
+                  "type": "fill"
+                }
+              ],
+              "measurement": "strava_activity",
+              "policy": "default",
+              "refId": "A",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "calories"
+                    ],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "sum"
+                  }
+                ]
+              ],
+              "tags": [
+                {
+                  "key": "type",
+                  "operator": "=",
+                  "value": "VirtualRide"
+                }
+              ]
+            }
+          ],
+          "thresholds": "",
+          "title": "VirtualBike:  Calories",
+          "transparent": true,
+          "type": "singlestat",
+          "valueFontSize": "80%",
+          "valueMaps": [
+            {
+              "op": "=",
+              "text": "N/A",
+              "value": "null"
+            }
+          ],
+          "valueName": "total"
+        },
+        {
+          "cacheTimeout": null,
+          "colorBackground": true,
+          "colorValue": false,
+          "colors": [
+            "rgba(27, 230, 19, 0.97)",
+            "rgba(85, 216, 103, 0.89)",
+            "rgba(209, 34, 34, 0.9)"
+          ],
+          "datasource": "${DS_GRAVA_SOURCE}",
+          "format": "none",
+          "gauge": {
+            "maxValue": 100,
+            "minValue": 0,
+            "show": false,
+            "thresholdLabels": false,
+            "thresholdMarkers": true
+          },
+          "id": 65,
+          "interval": null,
+          "links": [],
+          "mappingType": 1,
+          "mappingTypes": [
+            {
+              "name": "value to text",
+              "value": 1
+            },
+            {
+              "name": "range to text",
+              "value": 2
+            }
+          ],
+          "maxDataPoints": 100,
+          "nullPointMode": "connected",
+          "nullText": null,
+          "postfix": "",
+          "postfixFontSize": "50%",
+          "prefix": "",
+          "prefixFontSize": "50%",
+          "rangeMaps": [
+            {
+              "from": "null",
+              "text": "N/A",
+              "to": "null"
+            }
+          ],
+          "span": 2,
+          "sparkline": {
+            "fillColor": "rgba(31, 118, 189, 0.18)",
+            "full": false,
+            "lineColor": "rgb(31, 120, 193)",
+            "show": false
+          },
+          "targets": [
+            {
+              "dsType": "influxdb",
+              "groupBy": [
+                {
+                  "params": [
+                    "$interval"
+                  ],
+                  "type": "time"
+                },
+                {
+                  "params": [
+                    "null"
+                  ],
+                  "type": "fill"
+                }
+              ],
+              "measurement": "strava_activity",
+              "policy": "default",
+              "refId": "A",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "calories"
+                    ],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "sum"
+                  }
+                ]
+              ],
+              "tags": [
+                {
+                  "key": "type",
+                  "operator": "=",
+                  "value": "Run"
+                }
+              ]
+            }
+          ],
+          "thresholds": "",
+          "title": "Run: Calories",
+          "transparent": true,
+          "type": "singlestat",
+          "valueFontSize": "80%",
+          "valueMaps": [
+            {
+              "op": "=",
+              "text": "N/A",
+              "value": "null"
+            }
+          ],
+          "valueName": "total"
+        },
+        {
+          "cacheTimeout": null,
+          "colorBackground": true,
+          "colorValue": false,
+          "colors": [
+            "rgba(27, 230, 19, 0.97)",
+            "rgba(173, 123, 82, 0.89)",
+            "rgba(209, 34, 34, 0.9)"
+          ],
+          "datasource": "${DS_GRAVA_SOURCE}",
+          "decimals": null,
+          "format": "none",
+          "gauge": {
+            "maxValue": 100,
+            "minValue": 0,
+            "show": false,
+            "thresholdLabels": false,
+            "thresholdMarkers": true
+          },
+          "id": 66,
+          "interval": null,
+          "links": [],
+          "mappingType": 1,
+          "mappingTypes": [
+            {
+              "name": "value to text",
+              "value": 1
+            },
+            {
+              "name": "range to text",
+              "value": 2
+            }
+          ],
+          "maxDataPoints": 100,
+          "nullPointMode": "connected",
+          "nullText": null,
+          "postfix": "",
+          "postfixFontSize": "50%",
+          "prefix": "",
+          "prefixFontSize": "50%",
+          "rangeMaps": [
+            {
+              "from": "null",
+              "text": "N/A",
+              "to": "null"
+            }
+          ],
+          "span": 3,
+          "sparkline": {
+            "fillColor": "rgba(31, 118, 189, 0.18)",
+            "full": false,
+            "lineColor": "rgb(31, 120, 193)",
+            "show": false
+          },
+          "targets": [
+            {
+              "dsType": "influxdb",
+              "groupBy": [
+                {
+                  "params": [
+                    "$interval"
+                  ],
+                  "type": "time"
+                },
+                {
+                  "params": [
+                    "null"
+                  ],
+                  "type": "fill"
+                }
+              ],
+              "measurement": "strava_activity",
+              "policy": "default",
+              "refId": "A",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "calories"
+                    ],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "sum"
+                  }
+                ]
+              ],
+              "tags": [
+                {
+                  "key": "type",
+                  "operator": "=",
+                  "value": "Hike"
+                }
+              ]
+            }
+          ],
+          "thresholds": "",
+          "title": "Hike:  Calories",
+          "transparent": true,
+          "type": "singlestat",
+          "valueFontSize": "80%",
+          "valueMaps": [
+            {
+              "op": "=",
+              "text": "N/A",
+              "value": "null"
+            }
+          ],
+          "valueName": "total"
+        },
+        {
+          "cacheTimeout": null,
+          "colorBackground": true,
+          "colorValue": false,
+          "colors": [
+            "rgba(27, 230, 19, 0.97)",
+            "rgba(208, 208, 208, 0.89)",
+            "rgba(209, 34, 34, 0.9)"
+          ],
+          "datasource": "${DS_GRAVA_SOURCE}",
+          "format": "none",
+          "gauge": {
+            "maxValue": 100,
+            "minValue": 0,
+            "show": false,
+            "thresholdLabels": false,
+            "thresholdMarkers": true
+          },
+          "id": 67,
+          "interval": null,
+          "links": [],
+          "mappingType": 1,
+          "mappingTypes": [
+            {
+              "name": "value to text",
+              "value": 1
+            },
+            {
+              "name": "range to text",
+              "value": 2
+            }
+          ],
+          "maxDataPoints": 100,
+          "nullPointMode": "connected",
+          "nullText": null,
+          "postfix": "",
+          "postfixFontSize": "50%",
+          "prefix": "",
+          "prefixFontSize": "50%",
+          "rangeMaps": [
+            {
+              "from": "null",
+              "text": "N/A",
+              "to": "null"
+            }
+          ],
+          "span": 1,
+          "sparkline": {
+            "fillColor": "rgba(31, 118, 189, 0.18)",
+            "full": false,
+            "lineColor": "rgb(31, 120, 193)",
+            "show": false
+          },
+          "targets": [
+            {
+              "dsType": "influxdb",
+              "groupBy": [
+                {
+                  "params": [
+                    "$interval"
+                  ],
+                  "type": "time"
+                },
+                {
+                  "params": [
+                    "null"
+                  ],
+                  "type": "fill"
+                }
+              ],
+              "measurement": "strava_activity",
+              "policy": "default",
+              "query": "SELECT sum(\"distance\") FROM \"strava_activity\" WHERE \"type\" = 'Walk' AND $timeFilter GROUP BY time($interval) fill(null)",
+              "rawQuery": false,
+              "refId": "A",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "calories"
+                    ],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "sum"
+                  }
+                ]
+              ],
+              "tags": [
+                {
+                  "key": "type",
+                  "operator": "=",
+                  "value": "Walk"
+                }
+              ]
+            }
+          ],
+          "thresholds": "",
+          "title": "Walk:  Calories",
+          "transparent": true,
+          "type": "singlestat",
+          "valueFontSize": "80%",
+          "valueMaps": [
+            {
+              "op": "=",
+              "text": "N/A",
+              "value": "null"
+            }
+          ],
+          "valueName": "total"
+        },
+        {
+          "cacheTimeout": null,
+          "colorBackground": true,
+          "colorValue": false,
+          "colors": [
+            "rgba(27, 230, 19, 0.97)",
+            "rgba(228, 240, 8, 0.43)",
+            "rgba(209, 34, 34, 0.9)"
+          ],
+          "datasource": "${DS_GRAVA_SOURCE}",
+          "format": "none",
+          "gauge": {
+            "maxValue": 100,
+            "minValue": 0,
+            "show": false,
+            "thresholdLabels": false,
+            "thresholdMarkers": true
+          },
+          "id": 68,
+          "interval": null,
+          "links": [],
+          "mappingType": 1,
+          "mappingTypes": [
+            {
+              "name": "value to text",
+              "value": 1
+            },
+            {
+              "name": "range to text",
+              "value": 2
+            }
+          ],
+          "maxDataPoints": 100,
+          "nullPointMode": "connected",
+          "nullText": null,
+          "postfix": "",
+          "postfixFontSize": "50%",
+          "prefix": "",
+          "prefixFontSize": "50%",
+          "rangeMaps": [
+            {
+              "from": "null",
+              "text": "N/A",
+              "to": "null"
+            }
+          ],
+          "span": 2,
+          "sparkline": {
+            "fillColor": "rgba(31, 118, 189, 0.18)",
+            "full": false,
+            "lineColor": "rgb(31, 120, 193)",
+            "show": false
+          },
+          "targets": [
+            {
+              "dsType": "influxdb",
+              "groupBy": [
+                {
+                  "params": [
+                    "$interval"
+                  ],
+                  "type": "time"
+                },
+                {
+                  "params": [
+                    "null"
+                  ],
+                  "type": "fill"
+                }
+              ],
+              "measurement": "strava_activity",
+              "policy": "default",
+              "query": "SELECT sum(\"distance\") FROM \"strava_activity\" WHERE $timeFilter GROUP BY time($interval) fill(null)",
+              "rawQuery": false,
+              "refId": "A",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "calories"
+                    ],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "sum"
+                  }
+                ]
+              ],
+              "tags": []
+            }
+          ],
+          "thresholds": "",
+          "title": "Total Calories",
+          "transparent": true,
+          "type": "singlestat",
+          "valueFontSize": "80%",
+          "valueMaps": [
+            {
+              "op": "=",
+              "text": "N/A",
+              "value": "null"
+            }
+          ],
+          "valueName": "total"
+        }
+      ],
+      "repeat": null,
+      "repeatIteration": null,
+      "repeatRowId": null,
+      "showTitle": false,
+      "title": "Dashboard Row",
+      "titleSize": "h6"
+    },
+    {
+      "collapse": false,
+      "height": 56,
+      "panels": [
+        {
+          "cacheTimeout": null,
+          "colorBackground": true,
+          "colorValue": false,
+          "colors": [
+            "rgba(93, 217, 88, 0.97)",
+            "rgba(237, 60, 43, 0.5)",
+            "rgba(180, 27, 27, 0.9)"
+          ],
+          "datasource": "${DS_GRAVA_SOURCE}",
+          "format": "none",
+          "gauge": {
+            "maxValue": 100,
+            "minValue": 0,
+            "show": false,
+            "thresholdLabels": false,
+            "thresholdMarkers": true
+          },
+          "id": 54,
           "interval": null,
           "links": [],
           "mappingType": 1,
@@ -4740,20 +5431,20 @@
               "measurement": "strava_activity",
               "policy": "default",
               "query": "SELECT max(\"distance\") FROM \"strava_activity\" WHERE \"type\" = 'Ride' AND $timeFilter",
-              "rawQuery": true,
+              "rawQuery": false,
               "refId": "A",
               "resultFormat": "time_series",
               "select": [
                 [
                   {
                     "params": [
-                      "distance"
+                      "calories"
                     ],
                     "type": "field"
                   },
                   {
                     "params": [],
-                    "type": "max"
+                    "type": "mean"
                   }
                 ]
               ],
@@ -4767,7 +5458,7 @@
             }
           ],
           "thresholds": "",
-          "title": "Longest Ride",
+          "title": "Bike: Average Calories",
           "transparent": true,
           "type": "singlestat",
           "valueFontSize": "80%",
@@ -4786,11 +5477,11 @@
           "colorValue": false,
           "colors": [
             "rgba(93, 217, 88, 0.97)",
-            "rgba(0, 17, 255, 0.5)",
+            "rgba(0, 6, 255, 0.5)",
             "rgba(180, 27, 27, 0.9)"
           ],
           "datasource": "${DS_GRAVA_SOURCE}",
-          "format": "lengthm",
+          "format": "short",
           "gauge": {
             "maxValue": 100,
             "minValue": 0,
@@ -4798,7 +5489,7 @@
             "thresholdLabels": false,
             "thresholdMarkers": true
           },
-          "id": 52,
+          "id": 55,
           "interval": null,
           "links": [],
           "mappingType": 1,
@@ -4839,21 +5530,21 @@
               "groupBy": [],
               "measurement": "strava_activity",
               "policy": "default",
-              "query": "SELECT max(\"distance\") FROM \"strava_activity\" WHERE \"type\" = 'VirtualRide' AND $timeFilter",
-              "rawQuery": true,
+              "query": "SELECT max(\"distance\") FROM \"strava_activity\" WHERE \"type\" = 'Ride' AND $timeFilter",
+              "rawQuery": false,
               "refId": "A",
               "resultFormat": "time_series",
               "select": [
                 [
                   {
                     "params": [
-                      "distance"
+                      "calories"
                     ],
                     "type": "field"
                   },
                   {
                     "params": [],
-                    "type": "max"
+                    "type": "mean"
                   }
                 ]
               ],
@@ -4861,13 +5552,13 @@
                 {
                   "key": "type",
                   "operator": "=",
-                  "value": "Ride"
+                  "value": "VirtualRide"
                 }
               ]
             }
           ],
           "thresholds": "",
-          "title": "Longest VirtualBike",
+          "title": "VirtualBike: Average Calories",
           "transparent": true,
           "type": "singlestat",
           "valueFontSize": "80%",
@@ -4890,7 +5581,7 @@
             "rgba(209, 34, 34, 0.9)"
           ],
           "datasource": "${DS_GRAVA_SOURCE}",
-          "format": "lengthm",
+          "format": "short",
           "gauge": {
             "maxValue": 100,
             "minValue": 0,
@@ -4898,7 +5589,7 @@
             "thresholdLabels": false,
             "thresholdMarkers": true
           },
-          "id": 17,
+          "id": 61,
           "interval": null,
           "links": [],
           "mappingType": 1,
@@ -4952,15 +5643,15 @@
               ],
               "measurement": "strava_activity",
               "policy": "default",
-              "query": "SELECT max(\"distance\") FROM \"strava_activity\" WHERE \"type\" = 'Run' AND $timeFilter",
-              "rawQuery": true,
+              "query": "SELECT mean(\"distance\") FROM \"strava_activity\" WHERE \"type\" = 'Run' AND $timeFilter",
+              "rawQuery": false,
               "refId": "A",
               "resultFormat": "time_series",
               "select": [
                 [
                   {
                     "params": [
-                      "counter"
+                      "calories"
                     ],
                     "type": "field"
                   },
@@ -4980,7 +5671,7 @@
             }
           ],
           "thresholds": "",
-          "title": "Longest Run",
+          "title": "Run: Average Calories",
           "transparent": true,
           "type": "singlestat",
           "valueFontSize": "80%",
@@ -5003,7 +5694,7 @@
             "rgba(209, 34, 34, 0.9)"
           ],
           "datasource": "${DS_GRAVA_SOURCE}",
-          "format": "lengthm",
+          "format": "none",
           "gauge": {
             "maxValue": 100,
             "minValue": 0,
@@ -5011,7 +5702,7 @@
             "thresholdLabels": false,
             "thresholdMarkers": true
           },
-          "id": 18,
+          "id": 57,
           "interval": null,
           "links": [],
           "mappingType": 1,
@@ -5039,7 +5730,7 @@
               "to": "null"
             }
           ],
-          "span": 2,
+          "span": 3,
           "sparkline": {
             "fillColor": "rgba(31, 118, 189, 0.18)",
             "full": false,
@@ -5052,15 +5743,15 @@
               "groupBy": [],
               "measurement": "strava_activity",
               "policy": "default",
-              "query": "SELECT max(\"distance\") FROM \"strava_activity\" WHERE \"type\" = 'Hike' AND $timeFilter",
-              "rawQuery": true,
+              "query": "SELECT mean(\"distance\") FROM \"strava_activity\" WHERE \"type\" = 'Hike' AND $timeFilter",
+              "rawQuery": false,
               "refId": "A",
               "resultFormat": "time_series",
               "select": [
                 [
                   {
                     "params": [
-                      "distance"
+                      "calories"
                     ],
                     "type": "field"
                   }
@@ -5076,120 +5767,7 @@
             }
           ],
           "thresholds": "",
-          "title": "Longest Hike",
-          "transparent": true,
-          "type": "singlestat",
-          "valueFontSize": "80%",
-          "valueMaps": [
-            {
-              "op": "=",
-              "text": "N/A",
-              "value": "null"
-            }
-          ],
-          "valueName": "total"
-        },
-        {
-          "cacheTimeout": null,
-          "colorBackground": true,
-          "colorValue": false,
-          "colors": [
-            "rgba(27, 230, 19, 0.97)",
-            "rgba(108, 226, 239, 0.89)",
-            "rgba(209, 34, 34, 0.9)"
-          ],
-          "datasource": "${DS_GRAVA_SOURCE}",
-          "format": "lengthm",
-          "gauge": {
-            "maxValue": 100,
-            "minValue": 0,
-            "show": false,
-            "thresholdLabels": false,
-            "thresholdMarkers": true
-          },
-          "id": 19,
-          "interval": null,
-          "links": [],
-          "mappingType": 1,
-          "mappingTypes": [
-            {
-              "name": "value to text",
-              "value": 1
-            },
-            {
-              "name": "range to text",
-              "value": 2
-            }
-          ],
-          "maxDataPoints": 100,
-          "nullPointMode": "connected",
-          "nullText": null,
-          "postfix": "",
-          "postfixFontSize": "50%",
-          "prefix": "",
-          "prefixFontSize": "50%",
-          "rangeMaps": [
-            {
-              "from": "null",
-              "text": "N/A",
-              "to": "null"
-            }
-          ],
-          "span": 2,
-          "sparkline": {
-            "fillColor": "rgba(31, 118, 189, 0.18)",
-            "full": false,
-            "lineColor": "rgb(31, 120, 193)",
-            "show": false
-          },
-          "targets": [
-            {
-              "dsType": "influxdb",
-              "groupBy": [
-                {
-                  "params": [
-                    "$interval"
-                  ],
-                  "type": "time"
-                },
-                {
-                  "params": [
-                    "null"
-                  ],
-                  "type": "fill"
-                }
-              ],
-              "measurement": "strava_activity",
-              "policy": "default",
-              "query": "SELECT max(\"distance\") FROM \"strava_activity\" WHERE \"type\" = 'NordicSki' AND $timeFilter",
-              "rawQuery": true,
-              "refId": "A",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "counter"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "count"
-                  }
-                ]
-              ],
-              "tags": [
-                {
-                  "key": "type",
-                  "operator": "=",
-                  "value": "NordicSki"
-                }
-              ]
-            }
-          ],
-          "thresholds": "",
-          "title": "Longest X-Ski",
+          "title": "Hike: Average Calories",
           "transparent": true,
           "type": "singlestat",
           "valueFontSize": "80%",
@@ -5212,7 +5790,7 @@
             "rgba(209, 34, 34, 0.9)"
           ],
           "datasource": "${DS_GRAVA_SOURCE}",
-          "format": "lengthm",
+          "format": "short",
           "gauge": {
             "maxValue": 100,
             "minValue": 0,
@@ -5220,7 +5798,120 @@
             "thresholdLabels": false,
             "thresholdMarkers": true
           },
-          "id": 20,
+          "id": 59,
+          "interval": null,
+          "links": [],
+          "mappingType": 1,
+          "mappingTypes": [
+            {
+              "name": "value to text",
+              "value": 1
+            },
+            {
+              "name": "range to text",
+              "value": 2
+            }
+          ],
+          "maxDataPoints": 100,
+          "nullPointMode": "connected",
+          "nullText": null,
+          "postfix": "",
+          "postfixFontSize": "50%",
+          "prefix": "",
+          "prefixFontSize": "50%",
+          "rangeMaps": [
+            {
+              "from": "null",
+              "text": "N/A",
+              "to": "null"
+            }
+          ],
+          "span": 1,
+          "sparkline": {
+            "fillColor": "rgba(31, 118, 189, 0.18)",
+            "full": false,
+            "lineColor": "rgb(31, 120, 193)",
+            "show": false
+          },
+          "targets": [
+            {
+              "dsType": "influxdb",
+              "groupBy": [
+                {
+                  "params": [
+                    "$interval"
+                  ],
+                  "type": "time"
+                },
+                {
+                  "params": [
+                    "null"
+                  ],
+                  "type": "fill"
+                }
+              ],
+              "measurement": "strava_activity",
+              "policy": "default",
+              "query": "SELECT mean(\"distance\") FROM \"strava_activity\" WHERE \"type\" = 'Walk' AND $timeFilter",
+              "rawQuery": false,
+              "refId": "A",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "calories"
+                    ],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "count"
+                  }
+                ]
+              ],
+              "tags": [
+                {
+                  "key": "type",
+                  "operator": "=",
+                  "value": "Walk"
+                }
+              ]
+            }
+          ],
+          "thresholds": "",
+          "title": "Walk: Average Calories",
+          "transparent": true,
+          "type": "singlestat",
+          "valueFontSize": "80%",
+          "valueMaps": [
+            {
+              "op": "=",
+              "text": "N/A",
+              "value": "null"
+            }
+          ],
+          "valueName": "total"
+        },
+        {
+          "cacheTimeout": null,
+          "colorBackground": true,
+          "colorValue": false,
+          "colors": [
+            "rgba(27, 230, 19, 0.97)",
+            "rgba(228, 240, 8, 0.43)",
+            "rgba(209, 34, 34, 0.9)"
+          ],
+          "datasource": "${DS_GRAVA_SOURCE}",
+          "format": "short",
+          "gauge": {
+            "maxValue": 100,
+            "minValue": 0,
+            "show": false,
+            "thresholdLabels": false,
+            "thresholdMarkers": true
+          },
+          "id": 60,
           "interval": null,
           "links": [],
           "mappingType": 1,
@@ -5274,15 +5965,15 @@
               ],
               "measurement": "strava_activity",
               "policy": "default",
-              "query": "SELECT max(\"distance\") FROM \"strava_activity\" WHERE \"type\" = 'Walk' AND $timeFilter",
-              "rawQuery": true,
+              "query": "SELECT mean(\"distance\") FROM \"strava_activity\" WHERE $timeFilter",
+              "rawQuery": false,
               "refId": "A",
               "resultFormat": "time_series",
               "select": [
                 [
                   {
                     "params": [
-                      "counter"
+                      "calories"
                     ],
                     "type": "field"
                   },
@@ -5292,17 +5983,11 @@
                   }
                 ]
               ],
-              "tags": [
-                {
-                  "key": "type",
-                  "operator": "=",
-                  "value": "Walk"
-                }
-              ]
+              "tags": []
             }
           ],
           "thresholds": "",
-          "title": "Longest Walk",
+          "title": "Total Average Calories",
           "transparent": true,
           "type": "singlestat",
           "valueFontSize": "80%",
@@ -5320,18 +6005,7 @@
       "repeatIteration": null,
       "repeatRowId": null,
       "showTitle": false,
-      "title": "Row title",
-      "titleSize": "h6"
-    },
-    {
-      "collapse": false,
-      "height": -470,
-      "panels": [],
-      "repeat": null,
-      "repeatIteration": null,
-      "repeatRowId": null,
-      "showTitle": false,
-      "title": "Row title",
+      "title": "Dashboard Row",
       "titleSize": "h6"
     }
   ],
@@ -5342,7 +6016,7 @@
     "list": []
   },
   "time": {
-    "from": "2007-12-28T11:59:21.712Z",
+    "from": "2016-12-31T23:00:00.000Z",
     "to": "2017-12-27T11:59:21.712Z"
   },
   "timepicker": {
@@ -5372,5 +6046,5 @@
   },
   "timezone": "browser",
   "title": "Grava - pure numbers",
-  "version": 3
+  "version": 5
 }
