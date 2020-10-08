@@ -1,6 +1,8 @@
 Grava - Analyse your Strava activities in Grafana
 =============================
 
+Note: Needs fixing. There were changes in the used lib.
+
 Grava uses the [Strava API](https://strava.github.io/api/) to collect your personal activities. The activities are written inside a database and can be analysed afterwards.
 The used database [InfluxDB](https://www.influxdata.com/) is a time series database. 
 
