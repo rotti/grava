@@ -48,7 +48,7 @@ def get_string_from_file(file):
 # start uncommenting beneath here. put comments in aferwards an run token_helper again
 
 #client_id = get_string_from_file('client_id')
-#LOGIN_URL = 'https://www.strava.com/oauth/authorize?client_id='+ client_id + '&response_type=code&redirect_uri=http://localhost/token_exchange&scope=write&state=mystate&approval_prompt=force'
+#LOGIN_URL = 'https://www.strava.com/oauth/authorize?client_id='+ client_id + '&response_type=code&redirect_uri=http://localhost/exchange_token&scope=read&state=mystate&approval_prompt=force'
 #webbrowser.open(LOGIN_URL)
 #time.sleep(1500)
 
