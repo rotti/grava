@@ -45,10 +45,13 @@ def get_string_from_file(file):
 # it will look something like "http://localhost/token_exchange?state=mystate&code=1d1de858d2005b56e02d16d657cfad8bbc769a6f"
 # copy the "code" as a string in the file "auth_code" in your authfiles directory
 
+
+client_id = get_string_from_file('client_id')
+LOGIN_URL = 'https://www.strava.com/oauth/authorize?client_id='+ client_id + '&response_type=code&redirect_uri=http://localhost/exchange_token&scope=read&state=mystate&approval_prompt=force'
+print(LOGIN_URL)
+
 # start uncommenting beneath here. put comments in aferwards an run token_helper again
 
-#client_id = get_string_from_file('client_id')
-#LOGIN_URL = 'https://www.strava.com/oauth/authorize?client_id='+ client_id + '&response_type=code&redirect_uri=http://localhost/exchange_token&scope=read&state=mystate&approval_prompt=force'
 #webbrowser.open(LOGIN_URL)
 #time.sleep(1500)
 
@@ -71,6 +74,7 @@ request = requests.post(AUTH_URL, data=strava_forms)
 print("...reading access token from " + AUTH_URL)
 
 response = request.json()
+print(response)
 token = response['access_token']
 print("...getting access token ",token)
 
