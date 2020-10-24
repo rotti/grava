@@ -6,6 +6,7 @@ import json
 import sys
 import time
 import webbrowser
+from stravalib import Client
 
 # we need the files "client_id", "auth_code" and "strava_secret" inside this path
 # if you change the path, dont forget to .gitignore it
@@ -47,8 +48,10 @@ def get_string_from_file(file):
 
 
 client_id = get_string_from_file('client_id')
-LOGIN_URL = 'https://www.strava.com/oauth/authorize?client_id='+ client_id + '&response_type=code&redirect_uri=http://localhost/exchange_token&scope=read&state=mystate&approval_prompt=force'
+client=Client()
+LOGIN_URL = client.authorization_url(client_id=client_id, redirect_uri='http://localhost')
 print(LOGIN_URL)
+print("Should go in authfiles/auth_code")
 
 # start uncommenting beneath here. put comments in aferwards an run token_helper again
 
