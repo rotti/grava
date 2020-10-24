@@ -1,8 +1,10 @@
+#!/usr/bin/env python3
 import os
 import requests
-import urllib2
+import urllib.request, urllib.error, urllib.parse
 import json
 import sys
+import time
 import webbrowser
 
 # we need the files "client_id", "auth_code" and "strava_secret" inside this path
@@ -12,9 +14,9 @@ path_for_files = "./authfiles/"
 
 def internet_on():
     try:
-        response=urllib2.urlopen('http://www.google.com', timeout=1)
+        response=urllib.request.urlopen('http://www.google.com', timeout=1)
         return True
-    except urllib2.URLError as err: pass
+    except urllib.error.URLError as err: pass
     return False
 
 if not internet_on():
@@ -26,11 +28,11 @@ def get_string_from_file(file):
         with open(path_for_files + file, 'r') as string_from_file:
             global string
             string = string_from_file.read().replace('\n', '')
-            print "...reading " + path_for_files + file
+            print("...reading " + path_for_files + file)
             if not string:
                 sys.exit("...exiting." + path_for_files + file + "is empty")
             else:
-                print "...getting ", string + "\n"
+                print("...getting ", string + "\n")
             return string
     else:
         sys.exit("...exiting. cannot find " + path_for_files + file)
@@ -66,12 +68,12 @@ strava_forms = {
 
 session = requests.session()
 request = requests.post(AUTH_URL, data=strava_forms)
-print "...reading access token from " + AUTH_URL
+print("...reading access token from " + AUTH_URL)
 
 response = request.json()
 token = response['access_token']
-print "...getting access token ",token
+print("...getting access token ",token)
 
 with open(path_for_files + "access_token", "w") as access_token:
         access_token.write(token)
-        print "...writing access token to " + path_for_files + "access_token"
+        print("...writing access token to " + path_for_files + "access_token")

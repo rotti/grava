@@ -48,7 +48,7 @@ def create_dashboards(dashboards):
     for db in dashboards:
          with open(db) as dash_json_in, open(db + '.read', 'w') as dash_json_read:
               for line in dash_json_in:
-                  for old_datasource, new_datasource in datasource_replace.iteritems():
+                  for old_datasource, new_datasource in datasource_replace.items():
                       line = line.replace(old_datasource, new_datasource)
                   dash_json_read.write(line)
 
@@ -61,7 +61,7 @@ def create_dashboards(dashboards):
              dashdata["inputs"] = [{}]
         
          post_dashboard = session.post(url=api_url_dashboards, data=json.dumps(dashdata), headers=headers)
-         print "...uploading dashboard '" + db , post_dashboard
+         print("...uploading dashboard '" + db , post_dashboard)
 
 
 
@@ -69,7 +69,7 @@ def create_dashboards(dashboards):
 def delete_temp_dashboards():
     dashboard_reads = glob.glob('./dashboards/*.read')
     for reads in dashboard_reads:
-        print "...removing temporary dashboard for uploading ", reads
+        print("...removing temporary dashboard for uploading ", reads)
         os.remove(reads)
 
 
@@ -79,24 +79,24 @@ def delete_temp_dashboards():
 do_login = session.post(url=grafana_login_url, data=json.dumps({'user': user, 'password': password}), headers=headers)
 
 
-print "...setting up Grava"
+print("...setting up Grava")
 put_organisation = session.put(url=api_url_org, data=json.dumps({'name': grava_org}), headers=headers)
 
 
-print "...looking for existing datasources in", grafana_url
+print("...looking for existing datasources in", grafana_url)
 get_datasources = session.get(url=api_url_datasources)
 datasources = get_datasources.json()
 
 if not datasources:
     post_datasource = session.post(url=api_url_datasources, data=json.dumps(ifdb_source), headers=headers)
-    print "...create datasource. using config", ifdb_source
+    print("...create datasource. using config", ifdb_source)
 else:
-    print "...existing datasource(s) found."
-    print "...skipping create datasource."
+    print("...existing datasource(s) found.")
+    print("...skipping create datasource.")
 
 
-print "...dashboard(s) loaded", dashboards
-print "...creating dashboards"
+print("...dashboard(s) loaded", dashboards)
+print("...creating dashboards")
 create_dashboards(dashboards)
 delete_temp_dashboards()
  

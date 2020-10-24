@@ -1,5 +1,7 @@
+#!/usr/bin/env python3
 from influxdb import InfluxDBClient
 import os
+import sys
 import re
 import datetime
 import calendar
@@ -8,11 +10,11 @@ from stravalib.client import Client
 ######### Variables ############
 
 path_for_files = "./authfiles/"
-influxhost = "localhost"
-influxport = "8086"
-influxuser = "root"
-influxpassword = "root"
-influxdbname = "strava"
+influxhost = os.getenv("GRAVA_INFLUX_HOST", "localhost")
+influxport = os.getenv("GRAVA_INFLUX_PORT", "8086")
+influxuser = os.getenv("GRAVA_INFLUX_USER", "root")
+influxpassword = os.getenv("GRAVA_INFLUX_PASSWORD", "root")
+influxdbname = os.getenv("GRAVA_INFLUX_DB", "strava")
 
 strava = Client()
 fluxdb = InfluxDBClient(influxhost, influxport, influxuser, influxpassword, influxdbname)
@@ -22,14 +24,14 @@ fluxdb = InfluxDBClient(influxhost, influxport, influxuser, influxpassword, infl
 
 
 def initialise_db():
-    print "...create database: ", influxdbname
+    print("...create database: ", influxdbname)
     fluxdb.create_database(influxdbname)
 
     query = "select last(counter) from strava_activity"
-    print "...queying last activity from DB" + influxdbname + " with query: '" + query + "'"
+    print("...queying last activity from DB" + influxdbname + " with query: '" + query + "'")
 
     result = list(fluxdb.query(query))
-    print "...received result "
+    print("...received result ")
 
     db_results = []
     if result:
@@ -37,7 +39,7 @@ def initialise_db():
         if counter == "None": counter = 0
         for row in result[0]: last_strava_activity = row.get("time")
         
-        print "...last activity in DB " + influxdbname + " is: ", last_strava_activity
+        print("...last activity in DB " + influxdbname + " is: ", last_strava_activity)
 
         db_results.append(counter)
         db_results.append(last_strava_activity)
@@ -45,12 +47,12 @@ def initialise_db():
         counter = 0
         last_strava_activity = "1970-01-01T00:00:01Z"
 
-        print "...empty or no DB. getting all activities since 1970"
+        print("...empty or no DB. getting all activities since 1970")
         
         db_results.append(counter)
         db_results.append(last_strava_activity)
 
-    print "CCC", db_results
+    print("CCC", db_results)
     return db_results
 
 
@@ -60,9 +62,9 @@ def get_string_from_file(file):
         with open(path_for_files + file, 'r') as string_from_file:
             global string
             string = string_from_file.read().replace('\n', '')
-            print "...reading " + path_for_files + file 
-            print "...reading ", file 
-            print "...getting ", string 
+            print("...reading " + path_for_files + file )
+            print("...reading ", file )
+            print("...getting ", string )
             return string
     else:
         sys.exit("...exiting. cannot find " + path_for_files + file)
@@ -125,6 +127,7 @@ def descriptive_bool_from_count(number):
 
 
 def descriptive_heartrate(max_heartrate):
+    max_heartrate=int(max_heartrate)
     if (max_heartrate >= 175):
         return "High"
     elif (max_heartrate > 130) and (max_heartrate < 175):
@@ -138,6 +141,10 @@ def descriptive_heartrate(max_heartrate):
 
 
 def descriptive_temperature(avg_temp):
+    if avg_temp=="None":
+        return str("None")
+
+    avg_temp=int(avg_temp)
     if avg_temp == -999:
         return str("None")
     elif (avg_temp >= -100) and (avg_temp < 0):
@@ -332,27 +339,27 @@ def get_and_normalize_gravadata(counter, last_strava_activity):
           }]
         
 
-        #print db_row
-        print "...write activity id '" + u'{0.id}'.format(activity) + "' of user '" + athletename + "' to database:",influxdbname
+        #print(db_row)
+        print("...write activity id '" + u'{0.id}'.format(activity) + "' of user '" + athletename + "' to database:",influxdbname)
         write_data_in_db(db_row)
 
     return int(activity_count)
 
 ######### Do stuff here ############
 
-print "...initializing database"
+print("...initializing database")
 gravadata_list = initialise_db()
 
-print "...reading Strava API access token"
+print("...reading Strava API access token")
 access_token = get_string_from_file('access_token')
 strava.access_token = access_token
 
-print "...retreiving data from strava API and normalize. looking for new activities since", gravadata_list[1]
+print("...retrieving data from strava API and normalize. looking for new activities since", gravadata_list[1])
 entry_count = get_and_normalize_gravadata(gravadata_list[0], gravadata_list[1])
 
 if entry_count == 0:
-    print "...no new activities. finishing"    
+    print("...no new activities. finishing")
 else:
-    print "...finished filling the database:", influxdbname    
+    print("...finished filling the database:", influxdbname)
 
 

@@ -128,12 +128,6 @@
                   "key": "type",
                   "operator": "=",
                   "value": "VirtualRide"
-                },
-                {
-                  "condition": "AND",
-                  "key": "gear_name",
-                  "operator": "=",
-                  "value": "Merida auf Tacx"
                 }
               ]
             },
@@ -157,7 +151,7 @@
               "hide": false,
               "measurement": "strava_activity",
               "policy": "default",
-              "query": "SELECT mean(\"start_time\") FROM \"strava_activity\" WHERE \"type\" = 'Ride' OR \"type\" = 'VirtualRide' AND \"gear_name\" = 'Scultura 5000' AND $timeFilter GROUP BY time($interval) fill(null)",
+              "query": "SELECT mean(\"start_time\") FROM \"strava_activity\" WHERE \"type\" = 'Ride' OR \"type\" = 'VirtualRide' AND $timeFilter GROUP BY time($interval) fill(null)",
               "rawQuery": false,
               "refId": "B",
               "resultFormat": "time_series",
@@ -180,12 +174,6 @@
                   "key": "type",
                   "operator": "=",
                   "value": "Ride"
-                },
-                {
-                  "condition": "AND",
-                  "key": "gear_name",
-                  "operator": "=",
-                  "value": "Scultura 5000"
                 }
               ]
             },
@@ -232,12 +220,6 @@
                   "key": "type",
                   "operator": "=",
                   "value": "Ride"
-                },
-                {
-                  "condition": "AND",
-                  "key": "gear_name",
-                  "operator": "=",
-                  "value": "Rose Root Miller 3 2015"
                 }
               ]
             }
@@ -698,12 +680,6 @@
                   "key": "type",
                   "operator": "=",
                   "value": "VirtualRide"
-                },
-                {
-                  "condition": "AND",
-                  "key": "gear_name",
-                  "operator": "=",
-                  "value": "Merida auf Tacx"
                 }
               ]
             },
@@ -749,12 +725,6 @@
                   "key": "type",
                   "operator": "=",
                   "value": "Ride"
-                },
-                {
-                  "condition": "AND",
-                  "key": "gear_name",
-                  "operator": "=",
-                  "value": "Scultura 5000"
                 }
               ]
             },
@@ -800,12 +770,6 @@
                   "key": "type",
                   "operator": "=",
                   "value": "Ride"
-                },
-                {
-                  "condition": "AND",
-                  "key": "gear_name",
-                  "operator": "=",
-                  "value": "Rose Root Miller 3 2015"
                 }
               ]
             }
@@ -926,12 +890,6 @@
                   "key": "type",
                   "operator": "=",
                   "value": "VirtualRide"
-                },
-                {
-                  "condition": "AND",
-                  "key": "gear_name",
-                  "operator": "=",
-                  "value": "Merida auf Tacx"
                 }
               ]
             },
@@ -977,12 +935,6 @@
                   "key": "type",
                   "operator": "=",
                   "value": "Ride"
-                },
-                {
-                  "condition": "AND",
-                  "key": "gear_name",
-                  "operator": "=",
-                  "value": "Scultura 5000"
                 }
               ]
             },
@@ -1028,12 +980,6 @@
                   "key": "type",
                   "operator": "=",
                   "value": "Ride"
-                },
-                {
-                  "condition": "AND",
-                  "key": "gear_name",
-                  "operator": "=",
-                  "value": "Rose Root Miller 3 2015"
                 }
               ]
             }
@@ -1165,12 +1111,6 @@
                   "key": "type",
                   "operator": "=",
                   "value": "VirtualRide"
-                },
-                {
-                  "condition": "AND",
-                  "key": "gear_name",
-                  "operator": "=",
-                  "value": "Merida auf Tacx"
                 }
               ]
             },
@@ -1216,12 +1156,6 @@
                   "key": "type",
                   "operator": "=",
                   "value": "Ride"
-                },
-                {
-                  "condition": "AND",
-                  "key": "gear_name",
-                  "operator": "=",
-                  "value": "Scultura 5000"
                 }
               ]
             },
@@ -1267,12 +1201,6 @@
                   "key": "type",
                   "operator": "=",
                   "value": "Ride"
-                },
-                {
-                  "condition": "AND",
-                  "key": "gear_name",
-                  "operator": "=",
-                  "value": "Rose Root Miller 3 2015"
                 }
               ]
             }
@@ -1395,12 +1323,6 @@
                   "key": "type",
                   "operator": "=",
                   "value": "VirtualRide"
-                },
-                {
-                  "condition": "AND",
-                  "key": "gear_name",
-                  "operator": "=",
-                  "value": "Merida auf Tacx"
                 }
               ]
             },
@@ -1452,12 +1374,6 @@
                   "key": "type",
                   "operator": "=",
                   "value": "Ride"
-                },
-                {
-                  "condition": "AND",
-                  "key": "gear_name",
-                  "operator": "=",
-                  "value": "Scultura 5000"
                 }
               ]
             },
@@ -1509,12 +1425,6 @@
                   "key": "type",
                   "operator": "=",
                   "value": "Ride"
-                },
-                {
-                  "condition": "AND",
-                  "key": "gear_name",
-                  "operator": "=",
-                  "value": "Rose Root Miller 3 2015"
                 }
               ]
             }
@@ -1641,12 +1551,6 @@
                   "key": "type",
                   "operator": "=",
                   "value": "VirtualRide"
-                },
-                {
-                  "condition": "AND",
-                  "key": "gear_name",
-                  "operator": "=",
-                  "value": "Merida auf Tacx"
                 }
               ]
             },
@@ -1692,12 +1596,6 @@
                   "key": "type",
                   "operator": "=",
                   "value": "Ride"
-                },
-                {
-                  "condition": "AND",
-                  "key": "gear_name",
-                  "operator": "=",
-                  "value": "Scultura 5000"
                 }
               ]
             },
@@ -1743,12 +1641,6 @@
                   "key": "type",
                   "operator": "=",
                   "value": "Ride"
-                },
-                {
-                  "condition": "AND",
-                  "key": "gear_name",
-                  "operator": "=",
-                  "value": "Rose Root Miller 3 2015"
                 }
               ]
             }
@@ -1867,12 +1759,6 @@
                   "key": "type",
                   "operator": "=",
                   "value": "VirtualRide"
-                },
-                {
-                  "condition": "AND",
-                  "key": "gear_name",
-                  "operator": "=",
-                  "value": "Merida auf Tacx"
                 }
               ]
             },
@@ -1919,12 +1805,6 @@
                   "key": "type",
                   "operator": "=",
                   "value": "Ride"
-                },
-                {
-                  "condition": "AND",
-                  "key": "gear_name",
-                  "operator": "=",
-                  "value": "Scultura 5000"
                 }
               ]
             },
@@ -1971,12 +1851,6 @@
                   "key": "type",
                   "operator": "=",
                   "value": "Ride"
-                },
-                {
-                  "condition": "AND",
-                  "key": "gear_name",
-                  "operator": "=",
-                  "value": "Rose Root Miller 3 2015"
                 }
               ]
             }
