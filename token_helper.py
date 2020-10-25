@@ -52,11 +52,14 @@ def ensure_api_configured():
 
     if not client_id or not client_secret:
         print("Not configured. Enter API details found at https://www.strava.com/settings/api")
-        client_id = input("Client ID: ")
-        client_secret = input("Client Secret: ")
-        write_string_to_file("client_id", client_id)
-        write_string_to_file("client_secret", client_secret)
-
+        try:
+            client_id = input("Client ID: ")
+            client_secret = input("Client Secret: ")
+            write_string_to_file("client_id", client_id)
+            write_string_to_file("client_secret", client_secret)
+        except EOFError:
+            print("Please populate client_id and client_secret files manually")
+            sys.exit(1)
 
 def check_if_access_token_valid():
     print("Checking Access token valid")
@@ -105,8 +108,12 @@ def request_user_login():
     print(LOGIN_URL)
     webbrowser.open(LOGIN_URL)
 
-    auth_code = input("Enter the auth_code from the redirected URL: ")
-    write_string_to_file("auth_code", auth_code)
+    try:
+        auth_code = input("Enter the auth_code from the redirected URL: ")
+        write_string_to_file("auth_code", auth_code)
+    except EOFError:
+        print("Unable to read code from stdin. Assuming `auth_code` file is manually populated")
+        auth_code = get_string_from_file('auth_code')
 
     token_response = client.exchange_code_for_token(client_id=client_id, client_secret=client_secret, code=auth_code)
 
