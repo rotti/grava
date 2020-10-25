@@ -92,6 +92,7 @@ def refresh_current_token():
 
         write_string_to_file("access_token", refresh_response['access_token'])
         write_string_to_file("refresh_token", refresh_response['refresh_token'])
+        print("Token expires at " + str(refresh_response['expires_at']))
         
         check_if_access_token_valid()
 
@@ -119,6 +120,7 @@ def request_user_login():
 
     write_string_to_file("access_token", token_response['access_token'])
     write_string_to_file("refresh_token", token_response['refresh_token'])
+    print("Token expires at " + str(token_response['expires_at']))
     
     check_if_access_token_valid()
 
