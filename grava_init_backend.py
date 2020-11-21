@@ -339,16 +339,83 @@ def get_and_normalize_gravadata(counter, last_strava_activity):
           }]
         
 
-        #print(db_row)
         print("...write activity id '" + u'{0.id}'.format(activity) + "' of user '" + athletename + "' to database:",influxdbname)
+        getAndStoreGpxData(activity, activity.start_date)
         write_data_in_db(db_row)
 
     return int(activity_count)
+
+
+def getAndStoreGpxData(activity, start_date):
+    types = ['time', 'latlng', 'altitude', 'heartrate', 'temp']
+    streams = strava.get_activity_streams(activity.id, types = types, resolution='medium')
+    datapointcount = 0
+
+    if "time" not in streams.keys():
+        return False
+
+    for datapoint in streams['time'].data:
+        time = start_date + datetime.timedelta(seconds=datapoint)
+
+        latitude = 0
+        longitude = 0
+        altitude = 0
+        temp = 0
+        heartrate = 0
+
+        if 'altitude' in streams.keys():
+            altitude = streams['altitude'].data[datapointcount]
+        if 'heartrate' in streams.keys():
+            heartrate = streams['heartrate'].data[datapointcount]
+        if 'temp' in streams.keys():
+            temp = streams['temp'].data[datapointcount]
+        if 'latlng' in streams.keys():
+            latitude = streams['latlng'].data[datapointcount][0]
+            longitude = streams['latlng'].data[datapointcount][1]
+
+        db_row = [{
+            'measurement': 'strava_tracking',
+                'tags': {
+                    'id': u'{0.id}'.format(activity),
+                    'name': u'{0.name}'.format(activity),
+                    'type': u'{0.type}'.format(activity),
+                    'tracking_device_name': u'{0.device_name}'.format(activity),
+                    'has_commute': descriptive_bool(activity.commute),
+                    'was_on_trainer': descriptive_bool(activity.commute),
+                    'is_flagged': descriptive_bool(activity.flagged),
+                    'is_private': descriptive_bool(activity.private),
+                    'has_comment': descriptive_bool_from_count(int(activity.comment_count)),
+                    'was_with_other_athlete': descriptive_bool_from_count((int(activity.athlete_count) - 1)), 
+                    'has_achievement': descriptive_bool_from_count(int(activity.achievement_count)),
+                    'has_personal_records': descriptive_bool_from_count(int(activity.pr_count)),
+                    'has_kudos': descriptive_bool_from_count(int(activity.kudos_count)),
+                    'activity_id': u'{0.id}'.format(activity),
+                    'year': activity.start_date.year,
+                    'month': activity.start_date.month,
+                    'weekday': calendar.day_name[activity.start_date.weekday()],
+                    'workout_type': descriptive_workout_type(str(activity.workout_type)),
+                    'description': u'{0.description}'.format(activity)
+                 },
+                'time': u'{}'.format(time),
+                'fields': {
+                    'latitude': float(latitude),
+                    'longitude': float(longitude),
+                    'altitude': float(altitude),
+                    'heartrate': float(heartrate),
+                    'temp': float(temp),
+                 }
+          }]
+        write_data_in_db(db_row)
+        datapointcount = datapointcount + 1
+
+    return True
+
 
 ######### Do stuff here ############
 
 print("...initializing database")
 gravadata_list = initialise_db()
+#gravadata_list = [0, "1970-01-01T00:00:01Z"]
 
 print("...reading Strava API access token")
 access_token = get_string_from_file('access_token')
