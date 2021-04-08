@@ -351,7 +351,7 @@ def getAndStoreGpxData(activity, start_date):
     streams = strava.get_activity_streams(activity.id, types = types, resolution='medium')
     datapointcount = 0
 
-    if "time" not in streams.keys():
+    if not streams or "time" not in streams.keys():
         return False
 
     for datapoint in streams['time'].data:
